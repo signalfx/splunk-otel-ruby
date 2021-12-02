@@ -26,8 +26,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "opentelemetry-api", "~> 1.0"
+  spec.add_dependency "opentelemetry-exporter-otlp", "~> 0.21.0"
   spec.add_dependency "opentelemetry-sdk", "~> 1.0"
 
   # development dependencies
   spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
+  spec.add_development_dependency "simplecov", "~> 0.21.2"
+
+  spec.metadata = {
+    "rubygems_mfa_required" => "true"
+  }
 end
