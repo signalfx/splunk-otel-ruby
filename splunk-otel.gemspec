@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "opentelemetry-api", "~> 1.0"
+  spec.add_dependency "opentelemetry-sdk", "~> 1.0"
 
-  # For more information and examples about making a new gem, checkout our
-  # guide at: https://bundler.io/guides/creating_gem.html
+  # development dependencies
+  spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
 end
