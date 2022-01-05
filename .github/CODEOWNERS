@@ -1,0 +1,14 @@
+* @signalfx/gdi-ruby-maintainers @signalfx/gdi-ruby-approvers
+
+CODEOWNERS @signalfx/gdi-ruby-maintainers
+
+#####################################################
+#
+# Docs reviewers
+#
+#####################################################
+
+*.md    @signalfx/gdi-ruby-maintainers @signalfx/gdi-ruby-approvers @signalfx/gdi-docs
+*.rst   @signalfx/gdi-ruby-maintainers @signalfx/gdi-ruby-approvers @signalfx/gdi-docs
+docs/   @signalfx/gdi-ruby-maintainers @signalfx/gdi-ruby-approvers @signalfx/gdi-docs
+README* @signalfx/gdi-ruby-maintainers @signalfx/gdi-ruby-approvers @signalfx/gdi-docs @signalfx/gdi-specification-approvers @signalfx/gdi-specification-maintainers
