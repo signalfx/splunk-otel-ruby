@@ -7,7 +7,12 @@ require "opentelemetry/exporter/otlp"
 module Splunk
   class OtelTest < Test::Unit::TestCase
     test "configure SDK and start trace" do
-      OpenTelemetry::SDK.configure
+      Splunk::Otel.configure
+
+      assert_equal([
+                     OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator,
+                     OpenTelemetry::Baggage::Propagation.text_map_propagator
+                   ], OpenTelemetry.propagation.instance_variable_get(:@propagators))
 
       tracer = OpenTelemetry.tracer_provider.tracer("splunk-test", "1.0")
 
