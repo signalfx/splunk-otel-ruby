@@ -11,9 +11,14 @@ module Splunk
 
     def configure
       OpenTelemetry::SDK.configure do |c|
-        exporter = OpenTelemetry::Exporter::OTLP::Exporter.new(endpoint: "http://localhost:4318", compression: "gzip")
+        exporter = OpenTelemetry::Exporter::OTLP::Exporter.new(endpoint: "http://localhost:4318",
+                                                               compression: "gzip")
         c.add_span_processor(OpenTelemetry::SDK::Trace::Export::BatchSpanProcessor.new(exporter))
       end
+
+      provider_resource = OpenTelemetry.tracer_provider.instance_variable_get(:@resource)
+      resource_attributes = provider_resource.instance_variable_get(:@attributes)
+      puts service_name_warning if resource_attributes["service.name"] == "unknown_service"
 
       OpenTelemetry.tracer_provider.span_limits = gdi_span_limits
     end
@@ -27,6 +32,14 @@ module Splunk
                                                 link_attribute_count_limit: Float::INFINITY)
     end
 
-    module_function :configure, :gdi_span_limits
+    def service_name_warning
+      <<~WARNING
+        service.name attribute is not set, your service is unnamed and will be difficult to identify.
+        set your service name using the OTEL_SERVICE_NAME environment variable.
+        E.g. `OTEL_SERVICE_NAME="<YOUR_SERVICE_NAME_HERE>"`
+      WARNING
+    end
+
+    module_function :configure, :gdi_span_limits, :service_name_warning
   end
 end
