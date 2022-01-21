@@ -48,11 +48,5 @@ module Splunk
       assert_equal(Float::INFINITY, span_limits.event_attribute_count_limit)
       assert_equal(Float::INFINITY, span_limits.link_attribute_count_limit)
     end
-
-    test "set service name" do
-      provider_resource = OpenTelemetry.tracer_provider.instance_variable_get(:@resource)
-      resource_attributes = provider_resource.instance_variable_get(:@attributes)
-      assert_equal("test-service", resource_attributes["service.name"])
-    end
   end
 end
