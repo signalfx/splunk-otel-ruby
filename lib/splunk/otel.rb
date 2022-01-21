@@ -12,6 +12,7 @@ module Splunk
     def configure
       set_default_propagators
       set_default_exporter
+      set_default_span_limits
 
       # run SDK's setup function
       OpenTelemetry::SDK.configure
@@ -42,10 +43,12 @@ module Splunk
       default_env_vars({ "OTEL_PROPAGATORS" => "tracecontext,baggage" })
     end
 
-    def gdi_span_limits
+    def set_default_span_limits
       default_env_vars({ "OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT" => "1024",
                          "OTEL_RUBY_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT" => "12000" })
+    end
 
+    def gdi_span_limits
       infinite_defaults = { "OTEL_SPAN_EVENT_COUNT_LIMIT" => :event_count_limit,
                             "OTEL_SPAN_LINK_COUNT_LIMIT" => :link_count_limit,
                             "OTEL_EVENT_ATTRIBUTE_COUNT_LIMIT" => :event_attribute_count_limit,
@@ -75,6 +78,6 @@ module Splunk
     end
 
     module_function :configure, :gdi_span_limits, :set_default_propagators, :set_default_exporter,
-                    :verify_service_name, :service_name_warning, :default_env_vars
+                    :verify_service_name, :service_name_warning, :default_env_vars, :set_default_span_limits
   end
 end
