@@ -44,12 +44,13 @@ module Splunk
     end
 
     def set_default_span_limits
-      default_env_vars({ "OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT" => "1024",
+      default_env_vars({ "OTEL_SPAN_LINK_COUNT_LIMIT" => "1000",
                          "OTEL_RUBY_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT" => "12000" })
     end
 
     def gdi_span_limits
-      infinite_defaults = { "OTEL_SPAN_EVENT_COUNT_LIMIT" => :event_count_limit,
+      infinite_defaults = { "OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT" => :attribute_count_limit,
+                            "OTEL_SPAN_EVENT_COUNT_LIMIT" => :event_count_limit,
                             "OTEL_SPAN_LINK_COUNT_LIMIT" => :link_count_limit,
                             "OTEL_EVENT_ATTRIBUTE_COUNT_LIMIT" => :event_attribute_count_limit,
                             "OTEL_LINK_ATTRIBUTE_COUNT_LIMIT" => :link_attribute_count_limit }
