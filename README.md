@@ -4,7 +4,7 @@
   <a href="https://github.com/signalfx/gdi-specification/releases/tag/v1.2.0">
     <img alt="Splunk GDI specification" src="https://img.shields.io/badge/GDI-1.2.0-blueviolet?style=for-the-badge">
   </a>
-  <a href="https://github.com/signalfx/splunk-otel-ruby/actions?query=workflow%3A%22CI+build%22">
+  <a href="https://github.com/signalfx/splunk-otel-ruby/actions?query=workflow%3A%22Ruby+CI%22">
     <img alt="Build Status" src="https://img.shields.io/github/workflow/status/signalfx/splunk-otel-ruby/Ruby%20CI?style=for-the-badge">
   </a>
 </p>

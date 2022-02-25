@@ -41,10 +41,10 @@ module Splunk
     test "GDI defaults" do
       span_limits = OpenTelemetry.tracer_provider.instance_variable_get(:@span_limits)
 
-      assert_equal(1024, span_limits.attribute_count_limit)
+      assert_equal(1000, span_limits.link_count_limit)
       assert_equal(12_000, span_limits.attribute_length_limit)
+      assert_equal(Float::INFINITY, span_limits.attribute_count_limit)
       assert_equal(Float::INFINITY, span_limits.event_count_limit)
-      assert_equal(Float::INFINITY, span_limits.link_count_limit)
       assert_equal(Float::INFINITY, span_limits.event_attribute_count_limit)
       assert_equal(Float::INFINITY, span_limits.link_attribute_count_limit)
     end
