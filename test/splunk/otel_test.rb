@@ -7,7 +7,8 @@ require "opentelemetry/exporter/otlp"
 module Splunk
   class OtelTest < Test::Unit::TestCase
     def setup
-      with_env("OTEL_SERVICE_NAME" => "test-service") do
+      with_env("OTEL_SERVICE_NAME" => "test-service",
+               "SPLUNK_ACCESS_TOKEN" => "abcd") do
         Splunk::Otel.configure
       end
     end
@@ -36,6 +37,7 @@ module Splunk
 
       exporter = batch_processor.instance_variable_get(:@exporter)
       assert_equal("gzip", exporter.instance_variable_get(:@compression))
+      assert_equal({ "x-sf-token" => "abcd" }, exporter.instance_variable_get(:@headers))
     end
 
     test "GDI defaults" do

@@ -11,6 +11,7 @@ module Splunk
 
     def configure
       set_default_propagators
+      set_access_token_header
       set_default_exporter
       set_default_span_limits
 
@@ -37,6 +38,20 @@ module Splunk
                          "OTEL_EXPORTER_OTLP_TRACES_COMPRESSION" => "gzip",
                          "OTEL_EXPORTER_OTLP_COMPRESSION" => "gzip",
                          "OTEL_TRACES_EXPORTER" => "otlp" })
+    end
+
+    # add the access token header if the env variable is set
+    def set_access_token_header
+      splunk_access_token = ENV["SPLUNK_ACCESS_TOKEN"]
+      return if splunk_access_token.nil?
+
+      access_header = "x-sf-token=#{splunk_access_token}"
+      headers = ENV["OTEL_EXPORTER_OTLP_HEADERS"]
+      ENV["OTEL_EXPORTER_OTLP_HEADERS"] = if headers.nil?
+                                            access_header
+                                          else
+                                            "#{headers},#{access_header}"
+                                          end
     end
 
     def set_default_propagators
@@ -79,6 +94,7 @@ module Splunk
     end
 
     module_function :configure, :gdi_span_limits, :set_default_propagators, :set_default_exporter,
-                    :verify_service_name, :service_name_warning, :default_env_vars, :set_default_span_limits
+                    :verify_service_name, :service_name_warning, :default_env_vars,
+                    :set_default_span_limits, :set_access_token_header
   end
 end
