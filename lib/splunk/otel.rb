@@ -47,7 +47,7 @@ module Splunk
 
       access_header = "x-sf-token=#{splunk_access_token}"
       headers = ENV["OTEL_EXPORTER_OTLP_HEADERS"]
-      ENV["OTEL_EXPORTER_OTLP_HEADERS"] = if headers.nil?
+      ENV["OTEL_EXPORTER_OTLP_HEADERS"] = if headers.to_s.empty?
                                             access_header
                                           else
                                             "#{headers},#{access_header}"
