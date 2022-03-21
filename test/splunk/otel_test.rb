@@ -46,6 +46,18 @@ module Splunk
       assert_equal({ "x-sf-token" => "abcd" }, exporter.instance_variable_get(:@headers))
     end
 
+    test "Distro Resource attribute" do
+      resource = OpenTelemetry.tracer_provider.instance_variable_get(:@resource)
+      resource_attributes = resource.attribute_enumerator.to_h
+      assert(resource_attributes.include?("splunk.distro.version"))
+      assert_equal(resource_attributes["splunk.distro.version"], Splunk::Otel::VERSION)
+
+      # check that one of the default attributes also exists to ensure we didn't
+      # override the entire Resource's attributes
+      assert(resource_attributes.include?("telemetry.sdk.language"))
+      assert_equal(resource_attributes["telemetry.sdk.language"], "ruby")
+    end
+
     test "GDI defaults" do
       span_limits = OpenTelemetry.tracer_provider.instance_variable_get(:@span_limits)
 

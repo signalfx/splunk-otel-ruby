@@ -20,6 +20,10 @@ module Splunk
       # run SDK's setup function
       OpenTelemetry::SDK.configure do |c|
         c.service_name = service_name
+        c.resource = OpenTelemetry::SDK::Resources::Resource.create(
+          "splunk.distro.version" => Splunk::Otel::VERSION
+        )
+
         c.use_all if auto_instrument
         yield c if block_given?
       end
