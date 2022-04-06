@@ -33,11 +33,31 @@ module Splunk
     end
 
     def set_default_exporter
-      default_env_vars({ "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT" => "http://localhost:4318/v1/traces",
-                         "OTEL_EXPORTER_OTLP_ENDPOINT" => "http://localhost:4318/v1/traces",
-                         "OTEL_EXPORTER_OTLP_TRACES_COMPRESSION" => "gzip",
+      set_endpoint
+      default_env_vars({ "OTEL_EXPORTER_OTLP_TRACES_COMPRESSION" => "gzip",
                          "OTEL_EXPORTER_OTLP_COMPRESSION" => "gzip",
                          "OTEL_TRACES_EXPORTER" => "otlp" })
+    end
+
+    def set_endpoint
+      traces_endpoint = ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"]
+      endpoint = ENV["OTEL_EXPORTER_OTLP_ENDPOINT"]
+      splunk_realm = ENV["SPLUNK_REALM"]
+
+      # if user hasn't set traces endpoint or endpoint but has set the realm then
+      # set the endpoints to be https://api.<SPLUNK_REALM>.signalfx.com
+      # if either endpoint variable was set by the user then use those even if
+      # they've also set SPLUNK_REALM
+      return unless traces_endpoint.to_s.empty?
+      return unless endpoint.to_s.empty?
+
+      if splunk_realm.to_s.empty? || splunk_realm.to_s.eql?("none")
+        ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "http://localhost:4318/v1/traces"
+        ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "http://localhost:4318"
+      else
+        ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "https://api.#{splunk_realm}.signalfx.com"
+        ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://api.#{splunk_realm}.signalfx.com"
+      end
     end
 
     # add the access token header if the env variable is set
@@ -95,6 +115,6 @@ module Splunk
 
     module_function :configure, :gdi_span_limits, :set_default_propagators, :set_default_exporter,
                     :verify_service_name, :service_name_warning, :default_env_vars,
-                    :set_default_span_limits, :set_access_token_header
+                    :set_default_span_limits, :set_access_token_header, :set_endpoint
   end
 end

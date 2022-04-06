@@ -36,6 +36,7 @@ module Splunk
       assert_equal(512, batch_processor.instance_variable_get(:@batch_size))
 
       exporter = batch_processor.instance_variable_get(:@exporter)
+      assert_equal("http://localhost:4318/v1/traces", exporter.instance_variable_get(:@uri).to_s)
       assert_equal("gzip", exporter.instance_variable_get(:@compression))
       assert_equal({ "x-sf-token" => "abcd" }, exporter.instance_variable_get(:@headers))
     end
