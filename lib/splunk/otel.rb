@@ -55,8 +55,8 @@ module Splunk
         ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "http://localhost:4318/v1/traces"
         ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "http://localhost:4318"
       else
-        ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "https://api.#{splunk_realm}.signalfx.com"
-        ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://api.#{splunk_realm}.signalfx.com"
+        ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "https://ingest.#{splunk_realm}.signalfx.com/v2/trace"
+        ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://ingest.#{splunk_realm}.signalfx.com"
       end
     end
 
