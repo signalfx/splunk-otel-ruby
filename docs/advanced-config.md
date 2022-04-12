@@ -2,9 +2,8 @@
 
 ## Exporting directly to Splunk Observability Cloud
 
-The OTLP trace exporter can export directly to Splunk Observability Cloud. To
-achieve that, you need to set the `SPLUNK_ACCESS_TOKEN` and optional the
-`SPLUNK_REALM` (defaults to `us0` if access token is set).
+To export traces directly to Splunk Observability Cloud, bypassing the Collector,
+set the `SPLUNK_ACCESS_TOKEN` and `SPLUNK_REALM` environment variables.
 
 | Environment variable                   | Default value | Support     | Description                                                                                                                                          |
 | -------------------------------------- | ------------  | ----------- | ---                                                                                                                                                  |
