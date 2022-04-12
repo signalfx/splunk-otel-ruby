@@ -20,3 +20,16 @@ To keep backward compatibility with manual instrumentation for the SignalFx Ruby
 ```
 export OTEL_PROPAGATORS=b3multi
 ```
+
+## Trace configuration
+
+| Environment variable      | Config Option         | Default value             | Notes                                                                                                                                                                                                         |
+| ------------------------- | --------------------- | ------------------------- | ----------------------------------------------------------------------                                                                                                                                        |
+| OTEL_SERVICE_NAME                 | service_name          | `unnamed-ruby-service`  | The service name of this Ruby application. |
+| OTEL_RESOURCE_ATTRIBUTES          |                       | unset                     | Comma-separated list of resource attributes added to every reported span. <details><summary>Example</summary>`service.name=my-ruby-service,service.version=3.1,deployment.environment=production`</details> |
+| OTEL_SPAN_ATTRIBUTE_COUNT_LIMIT   |                       | `""` (unlimited)          | Maximum number of attributes per span.  |
+| OTEL_EVENT_ATTRIBUTE_COUNT_LIMIT  |                       | `""` (unlimited)          | Maximum number of attributes per event.  |
+| OTEL_LINK_ATTRIBUTE_COUNT_LIMIT   |                       | `""` (unlimited)          | Maximum number of attributes per link.  |
+| OTEL_SPAN_EVENT_COUNT_LIMIT       |                       | `""` (unlimited)          | Maximum number of events per span. |
+| OTEL_SPAN_LINK_COUNT_LIMIT        |                       | `1000`                    | Maximum number of links per span. |
+| OTEL_ATTRIBUTE_VALUE_LENGTH_LIMIT |                       | `12000`                   | Maximum length string attribute values can have. Values larger than this will be truncated. |
