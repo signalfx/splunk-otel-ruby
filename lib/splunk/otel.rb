@@ -10,7 +10,8 @@ module Splunk
     # this allows the user to rescue a generic exception type to catch all exceptions
     class Error < StandardError; end
 
-    def configure(auto_instrument: false)
+    def configure(service_name: ENV["OTEL_SERVICE_NAME"] || "unnamed-ruby-service",
+                  auto_instrument: false)
       set_default_propagators
       set_access_token_header
       set_default_exporter
@@ -18,6 +19,7 @@ module Splunk
 
       # run SDK's setup function
       OpenTelemetry::SDK.configure do |c|
+        c.service_name = service_name
         c.use_all if auto_instrument
         yield c if block_given?
       end
