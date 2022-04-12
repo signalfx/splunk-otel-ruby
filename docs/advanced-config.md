@@ -1,21 +1,16 @@
 # Advanced Configuration
 
-## Logging
+## Correlating traces and logs
 
-For adding the trace id and span id of the current trace to logs when using the
-[Ruby standard
-logger](https://ruby-doc.org/stdlib-3.1.1/libdoc/logger/rdoc/Logger.html) the
-function `Splunk::Otel::Logging.format_correlation` is provided and can be used
-to set the formatter:
+To add trace metadata of the current trace to logs, use the
+`Splunk::Otel::Logging.format_correlation` function of the 
+[Ruby standard logger](https://ruby-doc.org/stdlib-3.1.1/libdoc/logger/rdoc/Logger.html)
+to set the formatter, as in the following example:
 
 ``` ruby
 logger.formatter = proc do |severity, datetime, progname, msg|  
   "#{Splunk::Otel::Logging.format_correlation} #{msg}\n"
 end
-```
-
-This adds `service.name=<ServiceName> trace_id=<TraceId> span_id=<SpanId>` to
-each log line.
 
 ## Exporting directly to Splunk Observability Cloud
 
