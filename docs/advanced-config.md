@@ -34,7 +34,7 @@ achieve that, you need to set the `SPLUNK_ACCESS_TOKEN` and optional the
 | Environment variable | Default value        | Support | Description                                                                                        |
 | `OTEL_PROPAGATORS`     | `tracecontext,baggage` | Stable  | Comma-separated list of propagator names to be used. |
 
-If you wish to be compatible with SignalFx Ruby Tracing you can set the trace propagator to B3:
+To keep backward compatibility with manual instrumentation for the SignalFx Ruby Tracing library, set the trace propagator to B3:
 
 ```
 export OTEL_PROPAGATORS=b3multi
