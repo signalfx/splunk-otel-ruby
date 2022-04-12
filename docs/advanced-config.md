@@ -29,7 +29,7 @@ achieve that, you need to set the `SPLUNK_ACCESS_TOKEN` and optional the
 | `SPLUNK_REALM`                         | unset         | Stable      | (Optional) A realm is a self-contained deployment that hosts organizations. You can find your realm name on your profile page in the user interface. |
 
 
-## Trace propagation configuration
+## Propagators configuration
 
 | Environment variable | Default value        | Support | Description                                                                                        |
 | `OTEL_PROPAGATORS`     | `tracecontext,baggage` | Stable  | Comma-separated list of propagator names to be used. |
