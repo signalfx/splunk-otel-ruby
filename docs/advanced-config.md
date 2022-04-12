@@ -1,4 +1,4 @@
-# Advanced Configuration
+# Advanced configuration
 
 ## Exporting directly to Splunk Observability Cloud
 
