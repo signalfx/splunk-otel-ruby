@@ -1,4 +1,4 @@
-# Correlating Trace and Logs
+# Correlating trace and logs
 
 ## Standard Ruby logger
 
