@@ -58,7 +58,7 @@ installed, like the `opentelemetry-instrumentation-sinatra` gem.
 
 To enable instrumentation libraries manually, see [Manual instrumentation](#manually-instrument-code).
 
-## Manually Instrument Code 
+## Manual instrumentation
 
 First, install a specific instrumentation library with `gem install` or by
 listing it in your project's `Gemfile`. For example, installing the [Sinatra]()
