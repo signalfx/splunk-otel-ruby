@@ -41,7 +41,7 @@ gem "splunk-otel", "~> 0.1"
 Splunk::Otel.configure
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
 Advanced configuration documentation can be found
 [here](docs/advanced-config.md). In addition, special cases for instrumentation
