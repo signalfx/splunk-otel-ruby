@@ -41,16 +41,11 @@ gem "splunk-otel", "~> 0.1"
 Splunk::Otel.configure
 ```
 
-## Configure instrumentation for a Ruby application
+## Advanced configuration
 
-## Using B3 Propagator
-
-To switch to using the [B3](https://github.com/openzipkin/b3-propagation)
-propagation format set `OTEL_PROPAGATORS` to `b3multi`:
-
-```sh
-export OTEL_PROPAGATORS=b3multi
-```
+See [advanced-config.md](docs/advanced-config.md) for information
+on how to configure the instrumentation. Special instrumentation cases
+are documented in [instrumentation-special-cases.md](instrumentation-special-cases.md).
 
 # License
 
