@@ -54,7 +54,7 @@ Splunk::Otel.configure(auto_instrument: true)
 ```
 
 `auto_instrument: true` also works if individual instrumentation libraries are
-installed, like the gem `opentelemetry-instrumentation-sinatra`.
+installed, like the `opentelemetry-instrumentation-sinatra` gem.
 
 Or each instrumentation library can be [enabled manually](#manually-instrument-code).
 
