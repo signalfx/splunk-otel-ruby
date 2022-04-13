@@ -43,9 +43,9 @@ Splunk::Otel.configure
 
 ## Advanced configuration
 
-Advanced configuration documentation can be found
-[here](docs/advanced-config.md). In addition, special cases for instrumentation
-are documented [here](instrumentation-special-cases.md).
+See [advanced-config.md](docs/advanced-config.md) for information
+on how to configure the instrumentation. Special instrumentation cases
+are documented in [instrumentation-special-cases.md](instrumentation-special-cases.md).
 
 # License
 
