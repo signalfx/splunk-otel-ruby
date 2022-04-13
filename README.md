@@ -41,7 +41,7 @@ gem "splunk-otel", "~> 0.1"
 Splunk::Otel.configure
 ```
 
-## Automatically Instrument Code
+## Automatic instrumentation
 
 All available instrumentation libraries can be installed through the gem
 [opentelemetry-instrumentation-all]() and enabled by passing `auto_instrument:
