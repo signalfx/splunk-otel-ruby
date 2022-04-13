@@ -43,9 +43,11 @@ Splunk::Otel.configure
 
 ## Automatic instrumentation
 
-All available instrumentation libraries can be installed through the gem
-[opentelemetry-instrumentation-all]() and enabled by passing `auto_instrument:
-true` to `configure`:
+You can enable automatica instrumentation for all available instrumentation
+libraries by installing
+[opentelemetry-instrumentation-all](https://rubygems.org/gems/opentelemetry-instrumentation-all)
+gem. Enable the gem by passing `auto_instrument:true` to the `configure` method
+of `Splunk::Otel`. For example:
 
 ``` ruby
 require "splunk/otel"
@@ -60,9 +62,10 @@ To enable instrumentation libraries manually, see [Manual instrumentation](#manu
 
 ## Manual instrumentation
 
-First, install a specific instrumentation library with `gem install` or by
-listing it in your project's `Gemfile`. For example, installing the [Sinatra]()
-instrumentation with `gem install`:
+Install the instrumentation library you need using `gem install`. You can also
+list it in your project's `Gemfile`. For example, to install the
+[Sinatra](https://rubygems.org/gems/opentelemetry-instrumentation-sinatra)
+instrumentation using the `gem install` command, run the following:
 
 ``` 
 gem install opentelemetry-instrumentation-sinatra
