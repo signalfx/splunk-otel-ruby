@@ -68,8 +68,9 @@ instrumentation with `gem install`:
 gem install opentelemetry-instrumentation-sinatra
 ```
 
-Then, in a block passed to `Splunk::Otel.configure` configure the SDK to use the
-Sinatra instrumentation:
+In a block passed to `Splunk::Otel.configure` configure the SDK to use
+each of the instrumentation libraries. In the case of the Sinatra instrumentation,
+the block would look like the following example:
 
 ``` ruby
 require "splunk/otel"
