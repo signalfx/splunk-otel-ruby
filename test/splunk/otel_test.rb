@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "test_helper"
+require "splunk/otel"
 require "opentelemetry/sdk"
 require "opentelemetry/exporter/otlp"
 require "splunk/otel/logging"

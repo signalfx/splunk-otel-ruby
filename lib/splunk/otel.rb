@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "otel/version"
+require "opentelemetry/sdk"
 
 module Splunk
   # main module for application startup configuration
@@ -9,14 +10,17 @@ module Splunk
     # this allows the user to rescue a generic exception type to catch all exceptions
     class Error < StandardError; end
 
-    def configure
+    def configure(auto_instrument: false)
       set_default_propagators
       set_access_token_header
       set_default_exporter
       set_default_span_limits
 
       # run SDK's setup function
-      OpenTelemetry::SDK.configure
+      OpenTelemetry::SDK.configure do |c|
+        c.use_all if auto_instrument
+        yield c if block_given?
+      end
 
       # set span limits to GDI defaults if not set by the user
       OpenTelemetry.tracer_provider.span_limits = gdi_span_limits
