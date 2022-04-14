@@ -1,39 +1,63 @@
-# Basic
+# Basic Splunk Otel Distro example
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/basic`. To experiment with that code, run `bin/console` for an interactive prompt.
+The `console` script will use the `splunk-otel` gem from the root of this repo
+as the dependency.
 
-TODO: Delete this and the text above, and describe your gem
+Run the script and the function `Basic.some_spans` to create a couple spans and logs.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'basic'
+``` shell
+$ ./console
+irb(main):001:0> Basic.some_spans
+service.name=unnamed-ruby-service trace_id=01300273775f7550bf4af9f46097afd9 span_id=26737fe11ff026a5 : show log correlation
+=> true
 ```
 
-And then execute:
+### Export to console
 
-    $ bundle install
+The environment variable `OTEL_TRACES_EXPORTER` can be set to `console` to see
+the spans printed to the console when exported:
 
-Or install it yourself as:
+``` shell
+$ OTEL_TRACES_EXPORTER=console ./console
+service.name=unnamed-ruby-service trace_id=2c9a43b23a08163e4a25c8e3736c7bda span_id=43d59546e5d1b434 : show log correlation
+#<struct OpenTelemetry::SDK::Trace::SpanData
+ name="span-2",
+ ...
+ parent_span_id="\x96\xDD\xC3&\xEE\xAE\xCB:",
+ ...
+ instrumentation_library=
+  #<struct OpenTelemetry::SDK::InstrumentationLibrary
+   name="mytracer",
+   version="">,
+ span_id="C\xD5\x95F\xE5\xD1\xB44",
+ trace_id=",\x9AC\xB2:\b\x16>J%\xC8\xE3sl{\xDA",
+ ...>
+#<struct OpenTelemetry::SDK::Trace::SpanData
+ name="span-1",
+ ...
+ parent_span_id="\x00\x00\x00\x00\x00\x00\x00\x00",
+ ...
+ instrumentation_library=
+  #<struct OpenTelemetry::SDK::InstrumentationLibrary
+   name="mytracer",
+   version="">,
+ span_id="\x96\xDD\xC3&\xEE\xAE\xCB:",
+ trace_id=",\x9AC\xB2:\b\x16>J%\xC8\xE3sl{\xDA",
+ ...>
+=> true
+```
 
-    $ gem install basic
+### Export to Splunk
 
-## Usage
+The default exporter is `otlp` and can be used to export directly to Splunk by
+setting `SPLUNK_ACCESS_TOKEN` to a token for the organization you wish to export
+spans to:
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test-unit` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/basic. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/basic/blob/master/CODE_OF_CONDUCT.md).
-
-## Code of Conduct
-
-Everyone interacting in the Basic project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/basic/blob/master/CODE_OF_CONDUCT.md).
+``` shell
+$ OTEL_SERVICE_NAME=basic-ruby-distro-test
+SPLUNK_ACCESS_TOKEN=pMIUgbzKE8sqIrT2cdq_8g ./console
+irb(main):001:0> Basic.some_spans
+service.name=unnamed-ruby-service trace_id=754ecd93f0254ef5995e10a854dc47ad
+span_id=8d6c02874000469b : show log correlation
+=> true
+```

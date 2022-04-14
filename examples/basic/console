@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+
+  gem "splunk-otel", path: "../../"
+  gem "opentelemetry-exporter-otlp", "~> 0.21.0"
+end
+
+require "splunk/otel"
+require "splunk/otel/logging"
+require "opentelemetry/exporter/otlp"
+
+module Basic
+  def some_spans
+    logger = Logger.new(STDOUT)
+    logger.level = Logger::INFO
+
+    logger.formatter = proc do |severity, datetime, progname, msg|
+      "#{Splunk::Otel::Logging.format_correlation} : #{msg}\n"
+    end
+
+    Splunk::Otel.configure
+    tracer = OpenTelemetry.tracer_provider.tracer("mytracer")
+    tracer.in_span("span-1") do |span|
+      tracer.in_span("span-2") do |span|
+        logger.info("show log correlation")
+      end
+    end
+  end
+
+  module_function :some_spans
+end
+
+require "irb"
+IRB.start(__FILE__)
