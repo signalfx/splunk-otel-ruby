@@ -25,6 +25,9 @@ module Splunk
                      OpenTelemetry::Baggage::Propagation.text_map_propagator
                    ], OpenTelemetry.propagation.instance_variable_get(:@propagators))
 
+      resource_attributes = OpenTelemetry.tracer_provider.resource.attribute_enumerator.to_h
+      assert_equal("test-service", resource_attributes["service.name"])
+
       tracer_provider = OpenTelemetry.tracer_provider
       tracer = tracer_provider.tracer("splunk-test", "1.0")
 
