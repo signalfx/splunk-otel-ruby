@@ -8,7 +8,7 @@
 | `OTEL_EXPORTER_OTLP_ENDPOINT`     | `http://localhost:4318`          | Stable      | The OTLP endpoint to connect to.
 
 The Splunk Distribution of OpenTelemetry Ruby uses the OTLP traces exporter as
-the default setting. For debugging purposes an exporter, `console`, that writes
+the default setting. For debugging purposes, use the `console` exporter, which writes
 spans directly to the console is provided.
 
 An example of setting an alternate trace exporter:
