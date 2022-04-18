@@ -9,7 +9,7 @@
 
 The Splunk Distribution of OpenTelemetry Ruby uses the OTLP traces exporter as
 the default setting. For debugging purposes, use the `console` exporter, which writes
-spans directly to the console is provided.
+spans directly to the console.
 
 An example of setting an alternate trace exporter:
 
