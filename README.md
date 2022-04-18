@@ -30,26 +30,84 @@ This distribution comes with the following defaults:
 
 ## Get started
 
-Add this gem to your project's `Gemfile` file:
+This Splunk distribution comes with the following defaults:
+
+- [W3C tracecontext](https://www.w3.org/TR/trace-context/) and [W3C
+  baggage](https://www.w3.org/TR/baggage/) context propagation.
+- OTLP over HTTP exporter configured to send spans to a locally running [Splunk
+  OpenTelemetry Connector](https://github.com/signalfx/splunk-otel-collector)
+  (http://localhost:4318).
+- Unlimited default limits for configuration options to support full-fidelity
+  traces.
+
+Install the gem by adding it to your project's `Gemfile`:
 
 ``` ruby
 gem "splunk-otel", "~> 0.1"
 ```
 
+Configure OpenTelemetry using the `Splunk::Otel` module from `splunk/otel`:
 
 ``` ruby
+require "splunk/otel"
+...
 Splunk::Otel.configure
 ```
 
-## Automatic instrumentation
+## Basic configuration
+
+The `service.name` resource attribute is the only configuration option that
+needs to be specified, using either the environment variable `OTEL_SERVICE_NAME`
+or passing as an argument to `configure`:
+
+``` ruby
+Splunk::Otel.configure(service_name: "my-service")
+```
+
+Other resource attributes are not strictly required, but
+`deployment.environment` and `service.version` are recommended to be set if they
+are available. These can be set through the environment variable
+`OTEL_RESOURCE_ATTRIBUTES`:
+
+``` 
+OTEL_RESOURCE_ATTRIBUTES="service.version=1.2.3,deployment.environment=production"
+```
+
+## Advanced configuration
+
+See [advanced-config.md](docs/advanced-config.md) for information on how to
+configure the instrumentation.
+
+## Correlate traces and logs
+
+You can add trace metadata to logs using the OpenTelemetry trace API. Trace
+metadata lets you explore logs in Splunk Observability Cloud.
+
+See [Correlating traces and logs](docs/correlating-traces-and-logs.md) for more information.
+
+## Library instrumentation
+
+Supported libraries are listed
+[here](https://github.com/open-telemetry/opentelemetry-ruby/tree/main/instrumentation).
+The corresponding gems for the instrumentation libraries can be found under the
+[opentelemetry-ruby](https://rubygems.org/profiles/opentelemetry-ruby) profile
+on [rubygems.org](https://rubygems.org).
+
+### Automatic instrumentation
 
 You can enable automatic instrumentation of all libraries used in your project
 that have corresponding [OpenTelemetry Ruby
 gems](https://rubygems.org/profiles/opentelemetry-ruby) libraries by installing
 the
 [opentelemetry-instrumentation-all](https://rubygems.org/gems/opentelemetry-instrumentation-all)
-gem. Enable the gem by passing `auto_instrument:true` to the `configure` method
-of `Splunk::Otel`. For example:
+gem in your Gemfile:
+
+``` ruby
+gem "opentelemetry-instrumentation-all", "~> 0.23" 
+```
+
+Enable the instrumentations from the gem by passing `auto_instrument:true` to
+the `configure` method of `Splunk::Otel`. For example:
 
 ``` ruby
 require "splunk/otel"
@@ -87,18 +145,18 @@ end
 
 To enable instrumentation libraries manually, see [Manual instrumentation](#manually-instrument-code).
 
-## Manual instrumentation
+### Manual instrumentation
 
 Instrumentation gems can also be installed and enabled individually. This may be
 preferred in order to control exactly which gems are fetched when building your project.
 
-Install the instrumentation library using `gem install` or by including it in
+Install the instrumentation library by including it in
 the project's `Gemfile`. For example, to install the
 [Sinatra](https://rubygems.org/gems/opentelemetry-instrumentation-sinatra)
-instrumentation using the `gem install` command, run the following:
+instrumentation:
 
 ``` 
-gem install opentelemetry-instrumentation-sinatra
+gem "opentelemetry-instrumentation-sinatra", "~> 0.19"
 ```
 
 In a block passed to `Splunk::Otel.configure` configure the SDK to use
@@ -113,14 +171,11 @@ Splunk::Otel.configure do |c|
 end
 ```
 
-## Advanced configuration
+## Troubleshooting
 
-See [advanced-config.md](docs/advanced-config.md) for information
-on how to configure the instrumentation. Special instrumentation cases
-are documented in [instrumentation-special-cases.md](instrumentation-special-cases.md).
+For troubleshooting information, see the [Troubleshooting](docs/troubleshooting.md) documentation.
 
 # License
-
 
 The Splunk OpenTelemetry Ruby distribution is released under the terms of the
 Apache Software License version 2.0. For more details, see [the license
