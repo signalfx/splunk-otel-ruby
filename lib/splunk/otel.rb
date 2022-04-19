@@ -10,7 +10,7 @@ module Splunk
     # this allows the user to rescue a generic exception type to catch all exceptions
     class Error < StandardError; end
 
-    def configure(service_name: ENV["OTEL_SERVICE_NAME"] || "unnamed-ruby-service",
+    def configure(service_name: ENV.fetch("OTEL_SERVICE_NAME", "unnamed-ruby-service"),
                   auto_instrument: false)
       set_default_propagators
       set_access_token_header
@@ -50,9 +50,9 @@ module Splunk
     end
 
     def set_endpoint
-      traces_endpoint = ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"]
-      endpoint = ENV["OTEL_EXPORTER_OTLP_ENDPOINT"]
-      splunk_realm = ENV["SPLUNK_REALM"]
+      traces_endpoint = ENV.fetch("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT", nil)
+      endpoint = ENV.fetch("OTEL_EXPORTER_OTLP_ENDPOINT", nil)
+      splunk_realm = ENV.fetch("SPLUNK_REALM", nil)
 
       # if user hasn't set traces endpoint or endpoint but has set the realm then
       # set the endpoints to be https://api.<SPLUNK_REALM>.signalfx.com
@@ -61,22 +61,20 @@ module Splunk
       return unless traces_endpoint.to_s.empty?
       return unless endpoint.to_s.empty?
 
-      if splunk_realm.to_s.empty? || splunk_realm.to_s.eql?("none")
-        ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "http://localhost:4318/v1/traces"
-        ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "http://localhost:4318"
-      else
-        ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "https://ingest.#{splunk_realm}.signalfx.com/v2/trace"
-        ENV["OTEL_EXPORTER_OTLP_ENDPOINT"] = "https://ingest.#{splunk_realm}.signalfx.com"
-      end
+      ENV["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = if splunk_realm.to_s.empty? || splunk_realm.to_s.eql?("none")
+                                                    "http://localhost:4318/v1/traces"
+                                                  else
+                                                    "https://ingest.#{splunk_realm}.signalfx.com/v2/trace/otlp"
+                                                  end
     end
 
     # add the access token header if the env variable is set
     def set_access_token_header
-      splunk_access_token = ENV["SPLUNK_ACCESS_TOKEN"]
+      splunk_access_token = ENV.fetch("SPLUNK_ACCESS_TOKEN", nil)
       return if splunk_access_token.nil?
 
       access_header = "x-sf-token=#{splunk_access_token}"
-      headers = ENV["OTEL_EXPORTER_OTLP_HEADERS"]
+      headers = ENV.fetch("OTEL_EXPORTER_OTLP_HEADERS", nil)
       ENV["OTEL_EXPORTER_OTLP_HEADERS"] = if headers.to_s.empty?
                                             access_header
                                           else
