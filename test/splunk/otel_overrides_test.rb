@@ -35,7 +35,7 @@ module Splunk
       batch_processor = processors[0]
 
       exporter = batch_processor.instance_variable_get(:@exporter)
-      assert_equal("https://ingest.eu0.signalfx.com/v2/trace", exporter.instance_variable_get(:@uri).to_s)
+      assert_equal("https://ingest.eu0.signalfx.com/v2/trace/otlp", exporter.instance_variable_get(:@uri).to_s)
     end
   end
 end
