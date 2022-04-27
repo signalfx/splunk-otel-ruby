@@ -8,7 +8,7 @@ To add trace metadata of the current trace to logs, use the
 to set the formatter, as in the following example:
 
 ``` ruby
-require "splunk/otel/logging"
+require "splunk/otel"
 
 logger.formatter = proc do |severity, datetime, progname, msg|  
   "#{Splunk::Otel::Logging.format_correlation} : #{msg}\n"

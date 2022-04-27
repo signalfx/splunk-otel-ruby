@@ -4,7 +4,6 @@ require "test_helper"
 require "splunk/otel"
 require "opentelemetry/sdk"
 require "opentelemetry/exporter/otlp"
-require "splunk/otel/logging"
 
 module Splunk
   class OtelTest < Test::Unit::TestCase

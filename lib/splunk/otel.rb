@@ -10,6 +10,41 @@ module Splunk
     # this allows the user to rescue a generic exception type to catch all exceptions
     class Error < StandardError; end
 
+    # Configures the OpenTelemetry SDK and instrumentation with Splunk defaults.
+    #
+    # @yieldparam [Configurator] configurator Yields a configurator to the
+    #   provided block
+    #
+    # Example usage:
+    #   Without a block defaults are installed without any instrumentation
+    #
+    #     Splunk::Otel.configure
+    #
+    #   Install instrumentation individually with optional config
+    #
+    #     Splunk::Otel.configure do |c|
+    #       c.use 'OpenTelemetry::Instrumentation::Faraday', tracer_middleware: SomeMiddleware
+    #     end
+    #
+    #   Install all instrumentation with optional config
+    #
+    #     Splunk::Otel.configure do |c|
+    #       c.use_all 'OpenTelemetry::Instrumentation::Faraday' => { tracer_middleware: SomeMiddleware }
+    #     end
+    #
+    #   Add a span processor
+    #
+    #     Splunk::Otel.configure do |c|
+    #       c.add_span_processor SpanProcessor.new(SomeExporter.new)
+    #     end
+    #
+    #   Configure everything
+    #
+    #     Splunk::Otel.configure do |c|
+    #       c.logger = Logger.new(File::NULL)
+    #       c.add_span_processor SpanProcessor.new(SomeExporter.new)
+    #       c.use_all
+    #     end
     def configure(service_name: ENV.fetch("OTEL_SERVICE_NAME", "unnamed-ruby-service"),
                   auto_instrument: false)
       set_default_propagators
@@ -126,3 +161,5 @@ module Splunk
                     :set_default_span_limits, :set_access_token_header, :set_endpoint
   end
 end
+
+require "splunk/otel/logging"
