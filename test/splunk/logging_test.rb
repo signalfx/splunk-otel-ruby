@@ -2,7 +2,7 @@
 
 require "test_helper"
 require "opentelemetry/sdk"
-require "splunk/otel/logging"
+require "splunk/otel"
 
 module Splunk
   class LoggingTest < Test::Unit::TestCase
