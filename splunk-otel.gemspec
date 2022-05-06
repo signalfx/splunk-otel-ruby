@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-exporter-jaeger", "~> 0.20.1"
   spec.add_dependency "opentelemetry-exporter-otlp", "~> 0.21.0"
   spec.add_dependency "opentelemetry-propagator-b3", "~> 0.19.2"
-  spec.add_dependency "opentelemetry-sdk", "~> 1.0"
+  spec.add_dependency "opentelemetry-sdk", "1.0.2"
 
   # development dependencies
   spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
