@@ -19,7 +19,7 @@ module Splunk
 
     test "log correlation" do
       # test against no active span
-      assert_equal("service.name=test-service trace_id=00000000000000000000000000000000 span_id=0000000000000000",
+      assert_equal("service.name=test-service",
                    Splunk::Otel::Logging.format_correlation)
 
       tracer_provider = OpenTelemetry.tracer_provider
