@@ -26,6 +26,8 @@ module Splunk
                                       else
                                         "#{headers[CORS_EXPOSE_HEADER]}, #{SERVER_TIMING_HEADER}"
                                       end
+
+        headers
       end
 
       module_function :rum_headers
