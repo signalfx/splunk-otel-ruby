@@ -12,6 +12,8 @@ module Splunk
       def rum_headers(headers)
         span = OpenTelemetry::Trace.current_span
 
+        return headers if span == OpenTelemetry::Trace::Span::INVALID
+
         version = "00"
         trace_id = span.context.hex_trace_id
         span_id = span.context.hex_span_id

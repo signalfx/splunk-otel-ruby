@@ -20,6 +20,9 @@ module Splunk
       tracer_provider = OpenTelemetry.tracer_provider
       tracer = tracer_provider.tracer("splunk-log-test", "1.0")
 
+      # if not in a span don't add any headers
+      assert_equal({}, Splunk::Otel::Common.rum_headers({}))
+
       tracer.in_span("log-span") do |span|
         trace_id = span.context.trace_id.unpack1("H*")
         span_id = span.context.span_id.unpack1("H*")
