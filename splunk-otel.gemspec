@@ -32,17 +32,17 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-sdk", "~> 1.0"
 
   # development dependencies
-  spec.add_development_dependency "rack-test", "~> 1.1"
+  spec.add_development_dependency "rails", "~> 7.0.0"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rubocop", "~> 1.25"
   spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
   spec.add_development_dependency "simplecov", "~> 0.21.2"
-  spec.add_development_dependency  "test-unit", "~> 3.0"
+  spec.add_development_dependency "test-unit", "~> 3.0"
 
-  # for testing the rack middleware
-  spec.add_development_dependency  "opentelemetry-instrumentation-action_pack", "~> 0.1.4"
-  spec.add_development_dependency  "opentelemetry-instrumentation-rack", "~> 0.20"
-  spec.add_development_dependency  "rack", "~> 2.2"
+  spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "0.1.4"
+  spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.20"
+  spec.add_development_dependency "rack", "~> 2.2"
+  spec.add_development_dependency "rack-test", "~> 1.1"
 
   spec.metadata = {
     "rubygems_mfa_required" => "true"
