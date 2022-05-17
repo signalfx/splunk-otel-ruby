@@ -26,7 +26,7 @@ This distribution comes with the following defaults:
 
 ## Requirements
 
-- Ruby 2.5+
+- Ruby 2.6+
 
 ## Get started
 
