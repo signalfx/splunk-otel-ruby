@@ -15,3 +15,4 @@ gem "rack-test", "~> 1.1"
 
 # for testing the rack middleware
 gem "opentelemetry-instrumentation-rack", "0.20.2"
+gem "opentelemetry-instrumentation-action_pack", "0.1.4"

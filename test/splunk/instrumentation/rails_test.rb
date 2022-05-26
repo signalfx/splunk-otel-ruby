@@ -5,8 +5,11 @@ require 'rails'
 require "test_helper"
 require "opentelemetry/sdk"
 require "opentelemetry/instrumentation/rack"
+require "opentelemetry/instrumentation/action_pack"
 require "splunk/otel"
 require "splunk/otel/instrumentation/rack"
+require "splunk/otel/instrumentation/action_pack"
+require "splunk/otel/instrumentation/action_pack/railtie"
 require "rack/test"
 require 'test_helpers/app_config.rb'
 
@@ -20,7 +23,8 @@ module Splunk
     def setup
       with_env("OTEL_SERVICE_NAME" => "test-service") do
         Splunk::Otel.configure do |c|
-            c.use 'OpenTelemetry::Instrumentation::ActionPack'
+          c.use "OpenTelemetry::Instrumentation::ActionPack"
+          c.use "Splunk::Otel::Instrumentation::ActionPack"
         end
       end
     end
