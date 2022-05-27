@@ -1,6 +1,9 @@
 AllCops:
   TargetRubyVersion: 2.5
   NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'examples/rails-7-barebones/bin/*'
 
 Style/StringLiterals:
   Enabled: true
