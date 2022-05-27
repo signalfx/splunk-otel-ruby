@@ -5,6 +5,10 @@ AllCops:
     - 'bin/*'
     - 'examples/rails-7-barebones/bin/*'
 
+    # github actions' weirdness
+    # https://github.com/rubocop/rubocop/issues/9832#issuecomment-882111229
+    - vendor/bundle/**/*
+
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
