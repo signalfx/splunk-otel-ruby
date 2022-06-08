@@ -10,7 +10,7 @@ Bundler.require :default
 
 require "action_controller/railtie"
 
-# todo: remove me
+# TODO: remove me
 require_relative "lib/rum/railtie" if defined?(Rails::Railtie)
 
 # TraceRequestApp is a minimal Rails application inspired by the Rails

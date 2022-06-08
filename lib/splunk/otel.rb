@@ -3,7 +3,7 @@
 require_relative "otel/version"
 require "opentelemetry/sdk"
 
-# fixme: without this, otlp doesn't work out-of-the-box
+# FIXME: without this, otlp doesn't work out-of-the-box
 require "opentelemetry-exporter-otlp"
 
 module Splunk

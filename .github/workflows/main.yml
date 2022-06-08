@@ -39,4 +39,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run e2e tests via Docker
-        run: docker-compose -f docker-compose.rails-7-barebones.yml up --exit-code-from tester
+        run: docker-compose -f docker-compose.rails-7-barebones.yml up --build --exit-code-from tester
