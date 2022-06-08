@@ -53,7 +53,7 @@ jobs:
       - name: Bring up dependencies via detached docker-compose
         run: docker-compose -f docker-compose.rails-7-barebones.yml up -d --build
       - name: Smoke test
-        run: curl localhost:3000
+        run: curl rails_7_barebones:3000
       - name: Run tests
         run: bundle exec rake test_e2e
       - name: Bring dependencies down
