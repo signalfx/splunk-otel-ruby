@@ -10,9 +10,6 @@ Bundler.require :default
 
 require "action_controller/railtie"
 
-# TODO: remove me
-require_relative "lib/rum/railtie" if defined?(Rails::Railtie)
-
 # TraceRequestApp is a minimal Rails application inspired by the Rails
 # bug report template for action controller.
 # https://github.com/rails/rails/blob/v6.0.0/guides/bug_report_templates/action_controller_gem.rb
