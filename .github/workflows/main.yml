@@ -35,6 +35,7 @@ jobs:
         run: bundle exec rake test
 
   test-e2e-rails-7-barebones:
+    runs-on: ubuntu-latest
     steps:
       - name: Set up Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
