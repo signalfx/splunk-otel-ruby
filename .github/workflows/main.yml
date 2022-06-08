@@ -36,29 +36,7 @@ jobs:
 
   test-e2e-rails-7-barebones:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: [3.1]
     steps:
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-      - name: Apply RubyGems fixes
-        run: gem update --system
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: bundle install
-      - name: Reset docker-compose for safety
-        run: docker-compose down
-      - name: Bring up dependencies via detached docker-compose
-        run: docker-compose -f docker-compose.rails-7-barebones.yml up -d --build
-      - name: Show logs
-        run: docker-compose logs rails_7_barebones
-      - name: Smoke test
-        run: curl rails_7_barebones:3000
-      - name: Run tests
-        run: bundle exec rake test_e2e
-      - name: Bring dependencies down
-        run: docker-compose -f docker-compose.rails-7-barebones.yml down
+      - name: Run e2e tests via Docker
+        run: docker-compose -f docker-compose.rails-7-barebones.yml up --exit-code-from tester

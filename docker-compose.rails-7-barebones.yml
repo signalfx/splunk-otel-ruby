@@ -1,4 +1,3 @@
-version: "3"
 services:
   collector:
     image: quay.io/signalfx/splunk-otel-collector:latest
@@ -17,3 +16,19 @@ services:
       - 3000:3000
     environment:
       - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://collector:4318/v1/traces
+    links:
+      - collector
+
+  tester:
+    build:
+      context: .
+      dockerfile: ./test-e2e/Dockerfile
+    links:
+      - rails_7_barebones
+      - collector
+    environment:
+      - APP_HOST=rails_7_barebones
+      - APP_PORT=3000
+      - COLLECTOR_HOST=collector
+      - COLLECTOR_PORT=8378
+    entrypoint: ["./test-e2e/wait-for.sh", "rails_7_barebones:3000", "--", "bundle", "exec", "rake", "test_e2e"]

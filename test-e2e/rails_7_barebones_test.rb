@@ -7,9 +7,14 @@ require "json"
 module Splunk
   class Rails7BarebonesTest < Test::Unit::TestCase
     test "generates spans" do
-      Net::HTTP.get("localhost", '/', 3000)
+      app_host = ENV.fetch "APP_HOST", "localhost"
+      app_port = ENV.fetch("APP_PORT", "3000").to_i
+      collector_host = ENV.fetch "COLLECTOR_HOST", "localhost"
+      collector_port = ENV.fetch("COLLECTOR_PORT", "8378").to_i
 
-      response = Net::HTTP.get("localhost", '/?timeout=20&count=1', 8378)
+      Net::HTTP.get(app_host, '/', app_port)
+
+      response = Net::HTTP.get(collector_host, '/?timeout=20&count=1', collector_port)
       spans = JSON.parse(response)
       assert spans.count >= 1
 
