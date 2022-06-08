@@ -1,6 +1,6 @@
 version: "3"
 services:
-  otel:
+  collector:
     image: quay.io/signalfx/splunk-otel-collector:latest
     command: ["--config=/conf/otel-collector-config.yaml"]
     privileged: true
@@ -8,4 +8,4 @@ services:
       - 4318:4318
       - 8378:8378
     volumes:
-      - ./conf/otel-collector-config.yaml:/conf/otel-collector-config.yaml
+      - ../../conf/otel-collector-config.yaml:/conf/otel-collector-config.yaml

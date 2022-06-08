@@ -9,4 +9,4 @@ gem "puma"
 gem "rails", "~> 7.0.3"
 
 gem "opentelemetry-instrumentation-rails", "~> 0.21.0"
-gem "splunk-otel", path: "../../"
+gem "splunk-otel", path: ENV.fetch("SPLUNK_OTEL_LOCATION", "../../")

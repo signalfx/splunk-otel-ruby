@@ -33,3 +33,21 @@ jobs:
         run: bundle exec rubocop
       - name: Run tests
         run: bundle exec rake test
+
+  test-e2e-rails-7-barebones:
+    steps:
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: Apply RubyGems fixes
+        run: gem update --system
+      - name: Install dependencies
+        run: bundle install
+      - name: Bring up dependencies via detached docker-compose
+        run: docker-compose -f docker-compose.rails-7-barebones.yml up -d
+      - name: Run tests
+        run: bundle exec rake test_e2e
+      - name: Bring dependencies down
+        run: docker-compose -f docker-compose.rails-7-barebones.yml down

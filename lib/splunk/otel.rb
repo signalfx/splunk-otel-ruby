@@ -3,6 +3,9 @@
 require_relative "otel/version"
 require "opentelemetry/sdk"
 
+# fixme: without this, otlp doesn't work out-of-the-box
+require "opentelemetry-exporter-otlp"
+
 module Splunk
   # main module for application startup configuration
   module Otel
