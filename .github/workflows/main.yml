@@ -53,7 +53,7 @@ jobs:
       - name: Reset docker-compose for safety
         run: docker-compose down
       - name: Bring up dependencies via detached docker-compose
-        run: docker-compose -f docker-compose.rails-7-barebones.yml up --build
+        run: docker-compose -f docker-compose.rails-7-barebones.yml up -d --build
       - name: Show logs
         run: docker-compose logs rails_7_barebones
       - name: Smoke test
