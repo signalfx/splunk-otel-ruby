@@ -47,6 +47,7 @@ jobs:
           bundler-cache: true
       - name: Apply RubyGems fixes
         run: gem update --system
+      - uses: actions/checkout@v2
       - name: Install dependencies
         run: bundle install
       - name: Bring up dependencies via detached docker-compose
