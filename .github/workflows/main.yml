@@ -36,6 +36,9 @@ jobs:
 
   test-e2e-rails-7-barebones:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [3.1]
     steps:
       - name: Set up Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
