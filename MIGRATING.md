@@ -12,7 +12,7 @@ Ruby OTel agent.
 
 ## Compatibility and requirements
 
-The Splunk Distribution of OpenTelemetry Ruby requires Ruby 2.5 and
+The Splunk Distribution of OpenTelemetry Ruby requires Ruby 2.6 and
 higher.
 
 ## Migrate to the Splunk Distribution of OpenTelemetry Ruby
