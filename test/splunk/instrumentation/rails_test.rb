@@ -17,9 +17,15 @@ module Splunk
   class RumRailsTest < Test::Unit::TestCase
     include Rack::Test::Methods
 
+    EXPORTER = OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new
+
     def setup
+      EXPORTER.reset
+
       with_env("OTEL_SERVICE_NAME" => "test-service") do
+        span_processor = OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new(EXPORTER)
         Splunk::Otel.configure do |c|
+          c.add_span_processor span_processor
           c.use "OpenTelemetry::Instrumentation::ActionPack"
           c.use "Splunk::Otel::Instrumentation::ActionPack"
         end
@@ -45,7 +51,16 @@ module Splunk
 
       response_headers = last_response.headers
       assert_equal "Server-Timing", response_headers["Access-Control-Expose-Headers"]
-      assert_match(/traceparent;desc="00-\w{32}-\w{16}-00"/, response_headers["Server-Timing"])
+
+      # the only started span is the one done by the Rack middleware
+      # so the 1 span in the exporter is the one returned in the response
+      assert_equal(1, EXPORTER.finished_spans.size)
+      span = EXPORTER.finished_spans.first
+      expected_trace_id = span.trace_id.unpack1("H*")
+      expected_span_id = span.span_id.unpack1("H*")
+
+      assert_match("traceparent;desc=\"00-#{expected_trace_id}-#{expected_span_id}-01\"",
+                   response_headers["Server-Timing"])
     end
   end
 end
