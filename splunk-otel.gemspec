@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-sdk", "~> 1.0"
 
   # development dependencies
-  spec.add_development_dependency "rails", "~> 7.0.0"
+  spec.add_development_dependency "rails"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rubocop", "~> 1.25"
   spec.add_development_dependency "rubocop-rake", "~> 0.6.0"

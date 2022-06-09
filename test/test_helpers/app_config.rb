@@ -25,10 +25,7 @@ module AppConfig
 
     new_app.config.filter_parameters = [:param_to_be_filtered]
 
-    case Rails.version
-    when /^7\./
-      apply_rails_7_configs(new_app)
-    end
+    apply_rails_configs(new_app)
 
     remove_rack_middleware(new_app) if remove_rack_tracer_middleware
     add_exceptions_app(new_app) if use_exceptions_app
@@ -65,6 +62,20 @@ module AppConfig
       ActionDispatch::DebugExceptions,
       RedirectMiddleware
     )
+  end
+
+  def apply_rails_configs(application)
+    case Rails.version
+    when /^6\.1/
+      apply_rails_6_1_configs(application)
+    when /^7\./
+      apply_rails_7_configs(application)
+    end
+  end
+
+  def apply_rails_6_1_configs(application)
+    # Required in Rails 6
+    application.config.hosts << "example.org"
   end
 
   def apply_rails_7_configs(application)
