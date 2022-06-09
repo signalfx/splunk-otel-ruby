@@ -40,9 +40,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency  "test-unit", "~> 3.0"
 
   # for testing the rack middleware
-  spec.add_development_dependency  "rack", "~> 2.2"
   spec.add_development_dependency  "opentelemetry-instrumentation-action_pack", "~> 0.1.4"
   spec.add_development_dependency  "opentelemetry-instrumentation-rack", "~> 0.20"
+  spec.add_development_dependency  "rack", "~> 2.2"
 
   spec.metadata = {
     "rubygems_mfa_required" => "true"
