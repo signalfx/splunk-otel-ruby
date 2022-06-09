@@ -166,3 +166,4 @@ module Splunk
 end
 
 require "splunk/otel/logging"
+require "splunk/otel/common"

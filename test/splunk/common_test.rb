@@ -5,10 +5,9 @@ require "opentelemetry/sdk"
 require "splunk/otel"
 
 module Splunk
-  class LoggingTest < Test::Unit::TestCase
+  class CommonTest < Test::Unit::TestCase
     def setup
-      with_env("OTEL_SERVICE_NAME" => "test-service",
-               "SPLUNK_ACCESS_TOKEN" => "abcd") do
+      with_env("OTEL_SERVICE_NAME" => "test-service") do
         Splunk::Otel.configure
       end
     end
@@ -17,19 +16,21 @@ module Splunk
       OpenTelemetry.tracer_provider.shutdown
     end
 
-    test "log correlation" do
-      # test against no active span
-      assert_equal("service.name=test-service",
-                   Splunk::Otel::Logging.format_correlation)
-
+    test "RUM server response headers" do
       tracer_provider = OpenTelemetry.tracer_provider
       tracer = tracer_provider.tracer("splunk-log-test", "1.0")
+
+      # if not in a span don't add any headers
+      assert_equal({}, Splunk::Otel::Common.rum_headers({}))
 
       tracer.in_span("log-span") do |span|
         trace_id = span.context.trace_id.unpack1("H*")
         span_id = span.context.span_id.unpack1("H*")
-        assert_equal("service.name=test-service trace_id=#{trace_id} span_id=#{span_id}",
-                     Splunk::Otel::Logging.format_correlation)
+
+        headers = { "Access-Control-Expose-Headers" => "Server-Timing",
+                    "Server-Timing" =>
+                   "traceparent;desc=\"00-#{trace_id}-#{span_id}-01\"" }
+        assert_equal(headers, Splunk::Otel::Common.rum_headers({}))
       end
     end
   end

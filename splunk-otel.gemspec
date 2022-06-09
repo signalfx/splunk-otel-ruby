@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Splunk OpenTelemetry Ruby distribution"
   spec.homepage      = "https://github.com/signalfx/splunk-otel-ruby"
-  spec.required_ruby_version = ">= 2.5.0"
+  spec.required_ruby_version = ">= 2.6.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/signalfx/splunk-otel-ruby"
@@ -32,8 +32,17 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-sdk", "~> 1.0"
 
   # development dependencies
+  spec.add_development_dependency "rack-test", "~> 1.1"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rubocop", "~> 1.25"
   spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
   spec.add_development_dependency "simplecov", "~> 0.21.2"
+  spec.add_development_dependency  "test-unit", "~> 3.0"
+
+  # for testing the rack middleware
+  spec.add_development_dependency  "rack", "~> 2.2"
+  spec.add_development_dependency  "opentelemetry-instrumentation-action_pack", "~> 0.1.4"
+  spec.add_development_dependency  "opentelemetry-instrumentation-rack", "~> 0.20"
 
   spec.metadata = {
     "rubygems_mfa_required" => "true"
