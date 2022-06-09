@@ -39,4 +39,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run e2e tests via Docker
-        run: docker-compose -f docker-compose.rails-7-barebones.yml -p splunk-otel-ruby-rails-7-barebones up --build --exit-code-from tester
+        working-directory: ./examples/rails-7-barebones
+        run: docker-compose up --build --exit-code-from tester

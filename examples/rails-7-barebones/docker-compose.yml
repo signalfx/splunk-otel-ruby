@@ -1,11 +1,34 @@
-version: "3"
 services:
   collector:
     image: quay.io/signalfx/splunk-otel-collector:latest
     command: ["--config=/conf/otel-collector-config.yaml"]
-    privileged: true
     ports:
       - 4318:4318
       - 8378:8378
     volumes:
       - ../../conf/otel-collector-config.yaml:/conf/otel-collector-config.yaml
+
+  rails_7_barebones:
+    build:
+      context: ../../
+      dockerfile: ./examples/rails-7-barebones/Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=http://collector:4318/v1/traces
+    links:
+      - collector
+
+  tester:
+    build:
+      context: ../../
+      dockerfile: ./examples/rails-7-barebones/Dockerfile
+    links:
+      - rails_7_barebones
+      - collector
+    environment:
+      - APP_HOST=rails_7_barebones
+      - APP_PORT=3000
+      - COLLECTOR_HOST=collector
+      - COLLECTOR_PORT=8378
+    entrypoint: ["./wait-for.sh", "rails_7_barebones:3000", "--", "ruby", "tests-e2e/rails_7_barebones_test.rb"]

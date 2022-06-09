@@ -1,5 +1,5 @@
 FROM ruby:3-buster
-RUN apt-get update -qq && apt-get install -y nodejs
+RUN apt-get update -qq && apt-get install -y nodejs netcat
 
 # ruby comes with older versions of bundler sometimes
 RUN gem install bundler -v "2.3.14"
