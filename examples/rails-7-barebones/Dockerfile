@@ -13,4 +13,4 @@ ENV SPLUNK_OTEL_LOCATION="/splunk-otel-ruby"
 WORKDIR /splunk-otel-ruby/examples/rails-7-barebones
 RUN bundle install
 
-CMD ["bin/rackup", "app.ru", "--host", "0.0.0.0", "-p", "3000"]
+CMD ["bundle", "exec", "rackup", "app.ru", "--host", "0.0.0.0", "-p", "3000"]
