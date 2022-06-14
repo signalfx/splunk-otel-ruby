@@ -8,11 +8,14 @@ gemfile do
 
   gem "splunk-otel", path: "../../"
   gem "opentelemetry-exporter-otlp", "~> 0.21.0"
+
 end
 
 require "splunk/otel"
 require "splunk/otel/logging"
 require "opentelemetry/exporter/otlp"
+require "net/http"
+require "json"
 
 def some_spans
   logger = Logger.new($stdout)
@@ -29,6 +32,15 @@ def some_spans
       logger.info("show log correlation")
     end
   end
+end
+
+def test
+  collector_host = ENV.fetch("COLLECTOR_HOST", "localhost")
+  collector_port = ENV.fetch("COLLECTOR_PORT", "8378").to_i
+
+  response = Net::HTTP.get(collector_host, "/?timeout=20&count=1", collector_port)
+  spans = JSON.parse(response)
+  assert spans.count >= 1
 end
 
 require "irb"
