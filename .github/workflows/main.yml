@@ -33,6 +33,11 @@ jobs:
         run: bundle exec rubocop
       - name: Run tests
         run: bundle exec rake test
+      - name: Run basic example e2e test
+        run: ruby console
+        working-directory: ./examples/basic/
+        env:
+          TEST: true
 
   test-e2e-rails-7-barebones:
     runs-on: ubuntu-latest
