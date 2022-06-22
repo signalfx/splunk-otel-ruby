@@ -3,11 +3,11 @@
 The `console` script will use the `splunk-otel` gem from the root of this repo
 as the dependency.
 
-Run the script and the function `some_spans` to create a couple spans and logs.
+Run the script and the function `BasicExample.some_spans` to create a couple spans and logs.
 
 ``` shell
 $ ./console
-irb(main):001:0> some_spans
+irb(main):001:0> BasicExample.some_spans
 service.name=unnamed-ruby-service trace_id=01300273775f7550bf4af9f46097afd9 span_id=26737fe11ff026a5 : show log correlation
 => true
 ```
@@ -71,7 +71,7 @@ Run the example again:
 
 ``` 
 $ OTEL_SERVICE_NAME=basic-ruby-distro-test-collector ./console
-irb(main):001:0> some_spans
+irb(main):001:0> BasicExample.some_spans
 service.name=basic-ruby-distro-test-collector trace_id=0d26692f5982a470a1487c2be5207d20 span_id=64573df1bef69199 : show log correlation
 ```
 
@@ -85,7 +85,7 @@ spans to:
 
 ``` shell
 $ OTEL_SERVICE_NAME=basic-ruby-distro-test-direct SPLUNK_ACCESS_TOKEN=<ACCESS TOKEN> ./console
-irb(main):001:0> some_spans
+irb(main):001:0> BasicExample.some_spans
 service.name=basic-ruby-distro-test-direct trace_id=754ecd93f0254ef5995e10a854dc47ad
 span_id=8d6c02874000469b : show log correlation
 => true
