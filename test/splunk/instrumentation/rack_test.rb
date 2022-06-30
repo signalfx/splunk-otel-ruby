@@ -11,11 +11,7 @@ module Splunk
   class RumRackTest < Test::Unit::TestCase
     include Rack::Test::Methods
 
-    EXPORTER = OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new
-
     def setup
-      EXPORTER.reset
-
       with_env("OTEL_SERVICE_NAME" => "test-service") do
         span_processor = OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new(EXPORTER)
         Splunk::Otel.configure do |c|
@@ -26,7 +22,7 @@ module Splunk
     end
 
     def teardown
-      OpenTelemetry.tracer_provider.shutdown
+      reset_opentelemetry
     end
 
     def app
