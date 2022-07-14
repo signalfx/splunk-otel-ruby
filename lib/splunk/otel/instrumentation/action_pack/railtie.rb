@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
+require "rack/etag"
+
 module Splunk
   module Otel
     module Instrumentation
       module ActionPack
         # Install the Rack middleware for RUM responses
         class Railtie < ::Rails::Railtie
-          # TODO: use an explicit ordering to be after the Otel middleware
-          # instead of just adding it to the end of the list of middlewares
           config.before_initialize do |app|
-            app.middleware.use(
+            app.middleware.insert_before(
+              ::Rack::ETag,
               Splunk::Otel::Rack::RumMiddleware
             )
           end

@@ -20,7 +20,12 @@ module Splunk
         flags = span.context.trace_flags.sampled? ? "01" : "00"
 
         trace_parent = [version, trace_id, span_id, flags]
-        headers[SERVER_TIMING_HEADER] = "traceparent;desc=\"#{trace_parent.join("-")}\""
+        headers[SERVER_TIMING_HEADER] = if (headers[SERVER_TIMING_HEADER] || "").empty?
+                                          "traceparent;desc=\"#{trace_parent.join("-")}\""
+                                        else
+                                          # rubocop:disable Metrics/LineLength
+                                          "#{headers[SERVER_TIMING_HEADER]}, traceparent;desc=\"#{trace_parent.join("-")}\""
+                                        end
 
         # TODO: check if this needs to be conditioned on CORS
         headers[CORS_EXPOSE_HEADER] = if (headers[CORS_EXPOSE_HEADER] || "").empty?
