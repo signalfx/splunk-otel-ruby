@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rack/etag"
+require_relative "../rack"
 
 module Splunk
   module Otel
