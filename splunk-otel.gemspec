@@ -39,8 +39,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov", "~> 0.21.2"
   spec.add_development_dependency "test-unit", "~> 3.0"
 
-  spec.add_development_dependency "opentelemetry-instrumentation-base", "~> 0.21.0"
   spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.2.0"
+  spec.add_development_dependency "opentelemetry-instrumentation-base", "~> 0.21.0"
   spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.21"
   spec.add_development_dependency "rack", "~> 2.2"
   spec.add_development_dependency "rack-test", "~> 1.1"
