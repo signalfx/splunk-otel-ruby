@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-require 'opentelemetry'
-require 'opentelemetry-instrumentation-base'
+
+require "opentelemetry"
+require "opentelemetry-instrumentation-base"
 
 module Splunk
   module Otel

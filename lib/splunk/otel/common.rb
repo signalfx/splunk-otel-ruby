@@ -9,6 +9,10 @@ module Splunk
       CORS_EXPOSE_HEADER = "Access-Control-Expose-Headers"
       SERVER_TIMING_HEADER = "Server-Timing"
 
+      # rubocop:disable Lint/MissingCopEnableDirective
+      # rubocop:disable Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def rum_headers(headers)
         span = OpenTelemetry::Trace.current_span
 
@@ -23,7 +27,7 @@ module Splunk
         headers[SERVER_TIMING_HEADER] = if (headers[SERVER_TIMING_HEADER] || "").empty?
                                           "traceparent;desc=\"#{trace_parent.join("-")}\""
                                         else
-                                          # rubocop:disable Metrics/LineLength
+                                          # rubocop:disable Layout/LineLength
                                           "#{headers[SERVER_TIMING_HEADER]}, traceparent;desc=\"#{trace_parent.join("-")}\""
                                         end
 
