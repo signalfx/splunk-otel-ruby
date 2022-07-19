@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
+require "rails"
+
 require "test_helper"
 require "opentelemetry/sdk"
 require "opentelemetry/instrumentation/rack"
+require "opentelemetry/instrumentation/action_pack"
 require "splunk/otel"
 require "splunk/otel/instrumentation/rack"
+require "splunk/otel/instrumentation/action_pack"
+require "splunk/otel/instrumentation/action_pack/railtie"
 require "rack/test"
+require "test_helpers/app_config"
 
 module Splunk
-  class RumRackTest < Test::Unit::TestCase
+  class RumRailsTest < Test::Unit::TestCase
     include Rack::Test::Methods
 
     def setup
@@ -16,7 +22,8 @@ module Splunk
         span_processor = OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new(EXPORTER)
         Splunk::Otel.configure do |c|
           c.add_span_processor span_processor
-          c.use "OpenTelemetry::Instrumentation::Rack"
+          c.use "OpenTelemetry::Instrumentation::ActionPack"
+          c.use "Splunk::Otel::Instrumentation::ActionPack"
         end
       end
     end
@@ -26,15 +33,14 @@ module Splunk
     end
 
     def app
-      Rack::Builder.app do
-        use OpenTelemetry::Instrumentation::Rack::Middlewares::TracerMiddleware
-        use Splunk::Otel::Rack::RumMiddleware
-        run ->(_env) { [200, { "content-type" => "text/plain" }, ["OK"]] }
-      end
+      default_rails_app = AppConfig.initialize_app
+      ::Rails.application = default_rails_app
+
+      default_rails_app
     end
 
     test "RUM response from Rack middleware" do
-      get "/"
+      get "/ok"
 
       assert last_response.ok?
       assert_equal "OK", last_response.body
