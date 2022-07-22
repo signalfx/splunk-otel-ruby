@@ -20,12 +20,6 @@ then
 fi
 
 release_tag="$1"
-# without the starting 'v'
-release_version=$(echo "$release_tag" | cut -c2-)
-# 1 from 1.2.3
-major_version=$(echo "$release_version" | awk -F'.' '{print $1}')
-minor_version=$(echo "$release_version" | awk -F'.' '{print $2}')
-patch_version=$(echo "$release_version" | awk -F'.' '{print $3}')
 
 setup_gpg() {
   echo ">>> Setting GnuPG configuration ..."
