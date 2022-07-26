@@ -31,4 +31,4 @@ create_gh_release() {
 
 create_gh_release
 
-# bundle exec rake release
+bundle exec rake release
