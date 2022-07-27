@@ -20,6 +20,8 @@ then
 fi
 
 release_tag="$1"
+# without the starting 'v'
+release_version=$(echo "$release_tag" | cut -c2-)
 
 create_gh_release() {
   echo ">>> Creating GitHub release $release_tag ..."
@@ -32,4 +34,5 @@ create_gh_release() {
 create_gh_release
 
 bundle install
-bundle exec rake release
+bundle exec rake build
+bundle exec gem push pkg/splunk-otel-${release_version}.gem
