@@ -1,0 +1,23 @@
+image:
+  name: "docker-hub.repo.splunkdev.net/ruby:3.1.2"
+
+stages:
+  - build
+  - release
+
+build:
+  stage: build
+  script: |
+    gem update --system
+    bundle install
+    bundle exec rubocop
+    bundle exec rake test
+
+release:
+  stage: release
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+.*/'
+  before_script:
+    - ./scripts/install-release-deps.sh
+  script:
+    - ./scripts/release.sh "$CI_COMMIT_TAG"
