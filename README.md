@@ -46,6 +46,12 @@ Install the gem by adding it to your project's `Gemfile`:
 gem "splunk-otel", "~> 0.1"
 ```
 
+or
+
+```shell
+bundle add splunk-otel --version "~> 0.1"
+```
+
 Configure OpenTelemetry using the `Splunk::Otel` module from `splunk/otel`:
 
 ``` ruby
@@ -69,7 +75,7 @@ Other resource attributes are not strictly required, but
 are available. These can be set through the environment variable
 `OTEL_RESOURCE_ATTRIBUTES`:
 
-``` 
+```
 OTEL_RESOURCE_ATTRIBUTES="service.version=1.2.3,deployment.environment=production"
 ```
 
@@ -113,7 +119,7 @@ the
 gem in your Gemfile:
 
 ``` ruby
-gem "opentelemetry-instrumentation-all", "~> 0.23" 
+gem "opentelemetry-instrumentation-all", "~> 0.23"
 ```
 
 Enable the instrumentations from the gem by passing `auto_instrument:true` to
@@ -165,7 +171,7 @@ the project's `Gemfile`. For example, to install the
 [Sinatra](https://rubygems.org/gems/opentelemetry-instrumentation-sinatra)
 instrumentation:
 
-``` 
+```
 gem "opentelemetry-instrumentation-sinatra", "~> 0.19"
 ```
 
