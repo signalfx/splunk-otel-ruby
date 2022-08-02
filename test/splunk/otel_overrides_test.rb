@@ -11,18 +11,14 @@ module Splunk
       with_env("OTEL_PROPAGATORS" => "b3multi",
                "SPLUNK_REALM" => "eu0",
                "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT" => "",
-               "OTEL_EXPORTER_OTLP_ENDPOINT" => "") do
-        Splunk::Otel.configure(service_name: "overrides-test")
+               "OTEL_EXPORTER_OTLP_ENDPOINT" => "",
+               "OTEL_RESOURCE_ATTRIBUTES" => "key1=value1,key2=value2") do
+        Splunk::Otel.configure
       end
     end
 
     def teardown
       OpenTelemetry.tracer_provider.shutdown
-    end
-
-    test "service name set through configuration argument" do
-      resource_attributes = OpenTelemetry.tracer_provider.resource.attribute_enumerator.to_h
-      assert_equal("overrides-test", resource_attributes["service.name"])
     end
 
     test "check propagators override of b3multi" do

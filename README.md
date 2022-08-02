@@ -73,6 +73,16 @@ are available. These can be set through the environment variable
 OTEL_RESOURCE_ATTRIBUTES="service.version=1.2.3,deployment.environment=production"
 ```
 
+alternatively, if needed, more attributes can be added in code using:
+
+```ruby
+Splunk::Otel.configure(service_name: "my-service") do |c|
+  c.resource = OpenTelemetry::SDK::Resources::Resource.create(
+    "key" => "value"
+  )
+end
+```
+
 ## Advanced configuration
 
 See [advanced-config.md](docs/advanced-config.md) for information on how to
