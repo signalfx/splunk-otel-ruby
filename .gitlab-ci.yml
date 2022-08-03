@@ -1,17 +1,30 @@
 image:
   name: "docker-hub.repo.splunkdev.net/ruby:3.1.2"
 
+include:
+  - project: 'ci-cd/templates'
+    ref: master
+    file: '/prodsec/.oss-scan.yml'
+
 stages:
   - build
+  - scan
   - release
 
 build:
   stage: build
+  artifacts:
+    paths:
+      - Gemfile.lock
   script: |
     gem update --system
     bundle install
     bundle exec rubocop
     bundle exec rake test
+
+oss-scan:
+  stage: scan
+  extends: .oss-scan
 
 release:
   stage: release
