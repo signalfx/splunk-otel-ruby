@@ -1,14 +1,11 @@
 # Migrate from the SignalFx Tracing Library for Ruby
 
 The SignalFx Tracing Library for Ruby is scheduled to be deprecated by the end of 2022.
-Replace it with the agent from the Splunk Distribution of OpenTelemetry Ruby.
+Replace it with the Splunk Distribution of OpenTelemetry Ruby.
 
-The agent of the Splunk Distribution of OpenTelemetry Ruby is based on
-the OpenTelemetry Instrumentation for Ruby, an open-source project that
-uses the OpenTelemetry API.
-
-Read the following instructions to learn how to migrate to the Splunk
-Ruby OTel agent.
+Splunk Distribution of OpenTelemetry Ruby is based on and compatible with
+the OpenTelemetry Instrumentation for Ruby,
+an open-source project that uses the OpenTelemetry API.
 
 ## Compatibility and requirements
 
@@ -50,10 +47,6 @@ Follow these steps to remove the tracing library and its dependencies:
 
 1.  Remove `signalfx` from your Gemfile.
 
-### Deploy the Splunk Ruby agent
-
-To install the Splunk Distribution of OpenTelemetry Ruby, see the [README.md](README.md).
-
 ## Migrate to the Splunk Distribution of OpenTelemetry Ruby
 
 We're currently only testing installation using Bundler with RubyGems as a source.
@@ -66,7 +59,7 @@ migrate to
 [OpenTelemetry Collector](https://docs.splunk.com/Observability/gdi/opentelemetry/resources.html)
 first, as soon as (if) possible.
 
-### Deploy the Splunk Ruby agent
+### Deploy the Splunk Distribution of OpenTelemetry Ruby
 
 To install the Splunk Distribution of OpenTelemetry Ruby, see the [README.md](README.md).
 
@@ -107,7 +100,7 @@ See the
 [list of all known OTel Ruby instrumentations](https://opentelemetry.io/registry/?language=ruby&component=instrumentation)
 in OpenTelemetry registry.
 
-### Migrate settings for the Splunk Ruby OTel agent
+### Migrate settings for the Splunk Distribution of OpenTelemetry Ruby
 
 1. `SIGNALFX_ENDPOINT_URL` or `ingest_url` configuration parameter
     - if you installed Smart Agent and can migrate to OpenTelemetry Collector, do that first, then see the point below
