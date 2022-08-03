@@ -1,7 +1,7 @@
 # Migrate from the SignalFx Tracing Library for Ruby
 
-The SignalFx Tracing Library for Ruby will soon be deprecated. Replace it with the
-agent from the Splunk Distribution of OpenTelemetry Ruby.
+The SignalFx Tracing Library for Ruby is scheduled to be deprecated by the end of 2022.
+Replace it with the agent from the Splunk Distribution of OpenTelemetry Ruby.
 
 The agent of the Splunk Distribution of OpenTelemetry Ruby is based on
 the OpenTelemetry Instrumentation for Ruby, an open-source project that
@@ -61,10 +61,10 @@ We're currently only testing installation using Bundler with RubyGems as a sourc
 
 If you installed
 [Smart Agent](https://github.com/signalfx/signalfx-agent)
-to serve as a gateway (traces/metrics data proxy) then,
-if possible, migrate to
+to serve as a gateway (traces/metrics data proxy)
+migrate to
 [OpenTelemetry Collector](https://docs.splunk.com/Observability/gdi/opentelemetry/resources.html)
-first.
+first, as soon as (if) possible.
 
 ### Deploy the Splunk Ruby agent
 
@@ -76,7 +76,7 @@ To install the Splunk Distribution of OpenTelemetry Ruby, see the [README.md](RE
     [this table](https://github.com/signalfx/signalfx-ruby-tracing#supported-libraries)
     for a complete list.
 
-1.  Replace them with Open Telemetry equivalents per the table below.
+1.  Replace them with Open Telemetry, as per the table below.
 
 1.  Replace any other OpenTracing instrumentation packages you might have installed yourself.
 
@@ -103,31 +103,52 @@ To install the Splunk Distribution of OpenTelemetry Ruby, see the [README.md](RE
 
 #### OTel equivalents of other Open Tracing instrumentation gems
 
-See the list of all known OTel Ruby instrumentations: <https://opentelemetry.io/registry/?language=ruby&component=instrumentation>
+See the
+[list of all known OTel Ruby instrumentations](https://opentelemetry.io/registry/?language=ruby&component=instrumentation)
+in OpenTelemetry registry.
 
 ### Migrate settings for the Splunk Ruby OTel agent
 
 1. `SIGNALFX_ENDPOINT_URL` or `ingest_url` configuration parameter
     - if you installed Smart Agent and can migrate to OpenTelemetry Collector, do that first, then see the point below
     - if you have OpenTelemetry Collector available up as a sidecar (via `localhost`),
-      and it accepts OTLP on default ports, then just remove this setting, we export OTLP to OTel Collector by default
-    - if you need to keep using Smart Agent, then you need to set up a jaeger exporter yourself
+      and it accepts OTLP on default ports, just remove this setting, we export OTLP to OTel Collector by default
+    - if you need to keep using Smart Agent, you have to set up a jaeger exporter yourself
     - if you export directly to our backend (without OTel Collector as a proxy),
-      then just set `SPLUNK_REALM` to your realm
+      just set `SPLUNK_REALM` to your realm
+      (it's part of the URL, ie. `https://app.<realm>.signalfx.com/`, or `us0` if it's missing)
 
 1. `SIGNALFX_SERVICE_NAME` or `service_name` configuration parameter
-    - to set in environment use `OTEL_SERVICE_NAME`
-    - to set in code use `Splunk::Otel.configure(service_name: 'your service name', ...`
+    - to set in environment, use `OTEL_SERVICE_NAME`
+    - to set in code, use `Splunk::Otel.configure(service_name: 'your service name', ...`
 
 1. `SIGNALFX_ACCESS_TOKEN` or `access_token` configuration parameter
-    - can only be set in environment using `SPLUNK_ACCESS_TOKEN`
+    - to set in environment, use `SPLUNK_ACCESS_TOKEN`
 
-1. `SIGNALFX_SPAN_TAGS` or `span_tags`
-    - TODO: check if we provide a way set resource
+1. `SIGNALFX_SPAN_TAGS` or `span_tags` configuration parameter
+    - to set in environment:
+        - first, you need to rewrite the existing value to the,
+          which has a syntax of comma-separated `<key>=<value>` pairs (e.g. `key1=value1,key2=value2`)
+        - set `OTEL_RESOURCE_ATTRIBUTES` to the new value
+    - to set in code:
+        - call `OpenTelemetry::SDK::Resources::Resource.create` with a `Hash`
+          consisting of your existing key-value pairs
+        - pass the newly created `Resource` to the `resource=` attribute in configuration
+        - for example:
+           ```ruby
+           Splunk::Otel.configure(other_args) do |c|
+             c.resource = OpenTelemetry::SDK::Resources::Resource.create(
+               "key" => "value"
+             )
+             # ...
+           end
+           ```
 
 1. `SIGNALFX_RECORDED_VALUE_MAX_LENGTH`
     - can be set in environment using `OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT`
-    - see <https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/sdk-environment-variables.md#span-limits>
+    - see
+      [the list of span limits settings](<https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/sdk-environment-variables.md#span-limits>)
+      to learn more
 
 1. `tracer` configuration parameter
     - if you need to set its equivalent, open an issue, and tell us about your use case
