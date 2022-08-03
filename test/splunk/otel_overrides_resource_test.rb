@@ -55,9 +55,7 @@ module Splunk
     end
 
     test "resource can be set using ENV" do
-      subject do |c|
-        puts c.instance_variable_get(:@resource).attribute_enumerator.to_h
-      end
+      subject
 
       assert_equal("value1", resource_attributes["key1"])
       assert_equal("value2", resource_attributes["key2"])
@@ -75,6 +73,7 @@ module Splunk
       assert_equal("value3", resource_attributes["key3"])
       assert_equal("value1", resource_attributes["key1"])
       assert_equal("value2", resource_attributes["key2"])
+      assert_equal("overrides-test", resource_attributes["service.name"])
       assert_process_metadata
       assert_distro_metadata
     end
