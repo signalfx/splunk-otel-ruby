@@ -15,13 +15,12 @@ higher.
 ## Known limitations compared to SignalFx Tracing for Ruby
 
 - Different subset of supported Ruby versions, see previous section
-- No auto-instrumentation for
-  (more details in
-  [OTel instrumentation equivalents](#signalfx-instrumentations-equivalents)
-  ):
+- Currently no auto-instrumentation for:
     - `elasticsearch` (<https://github.com/elastic/elasticsearch-ruby>)
     - `grape` (<https://github.com/ruby-grape/grape>)
     - `sequel` (<https://github.com/jeremyevans/sequel>)
+
+More details in [OTel instrumentation equivalents](#signalfx-instrumentations-equivalents).
 
 ## Migrate to the Splunk Distribution of OpenTelemetry Ruby
 
@@ -69,7 +68,7 @@ To install the Splunk Distribution of OpenTelemetry Ruby, see the [README.md](RE
     [this table](https://github.com/signalfx/signalfx-ruby-tracing#supported-libraries)
     for a complete list.
 
-1.  Replace them with Open Telemetry, as per the table below.
+1.  Replace them with OpenTelemetry, as per the table below.
 
 1.  Replace any other OpenTracing instrumentation packages you might have installed yourself.
 
