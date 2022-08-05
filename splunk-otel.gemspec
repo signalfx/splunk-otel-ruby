@@ -44,6 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.21"
   spec.add_development_dependency "rack", "~> 2.2"
   spec.add_development_dependency "rack-test", "~> 1.1"
+  spec.add_development_dependency "simplecov-cobertura", "~> 2.1.0"
 
   spec.metadata = {
     "rubygems_mfa_required" => "true"
