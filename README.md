@@ -36,7 +36,7 @@ This Splunk distribution comes with the following defaults:
   baggage](https://www.w3.org/TR/baggage/) context propagation.
 - OTLP over HTTP exporter configured to send spans to a locally running [Splunk
   OpenTelemetry Connector](https://github.com/signalfx/splunk-otel-collector)
-  (http://localhost:4318).
+  at http://localhost:4318.
 - Unlimited default limits for configuration options to support full-fidelity
   traces.
 
@@ -104,7 +104,7 @@ See [Correlating traces and logs](docs/correlating-traces-and-logs.md) for more 
 ## Library instrumentation
 
 Supported libraries are listed
-[here](https://github.com/open-telemetry/opentelemetry-ruby/tree/main/instrumentation).
+[here](https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation).
 The corresponding gems for the instrumentation libraries can be found under the
 [opentelemetry-ruby](https://rubygems.org/profiles/opentelemetry-ruby) profile
 on [rubygems.org](https://rubygems.org).

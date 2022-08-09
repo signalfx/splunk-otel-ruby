@@ -139,7 +139,7 @@ in OpenTelemetry registry.
 1. `SIGNALFX_RECORDED_VALUE_MAX_LENGTH`
     - can be set in environment using `OTEL_SPAN_ATTRIBUTE_VALUE_LENGTH_LIMIT`
     - see
-      [the list of span limits settings](<https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/sdk-environment-variables.md#span-limits>)
+      [the list of span limits settings](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/sdk-environment-variables.md#span-limits)
       to learn more
 
 1. `tracer` configuration parameter
