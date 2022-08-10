@@ -48,3 +48,12 @@ jobs:
       - name: Run e2e tests via Docker
         working-directory: ./examples/rails-7-barebones
         run: docker-compose up --build --exit-code-from tester
+
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.5.0
+        with:
+          fail: true
