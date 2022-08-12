@@ -13,6 +13,10 @@ module Splunk
     # this allows the user to rescue a generic exception type to catch all exceptions
     class Error < StandardError; end
 
+    attr_reader(:trace_response_header_enabled)
+
+    @trace_response_header_enabled = true
+
     # Configures the OpenTelemetry SDK and instrumentation with Splunk defaults.
     #
     # @yieldparam [Configurator] configurator Yields a configurator to the
@@ -49,7 +53,10 @@ module Splunk
     #       c.use_all
     #     end
     def configure(service_name: ENV.fetch("OTEL_SERVICE_NAME", "unnamed-ruby-service"),
-                  auto_instrument: false)
+                  auto_instrument: false,
+                  trace_response_header_enabled: ENV.fetch("SPLUNK_TRACE_RESPONSE_HEADER_ENABLED", "true"))
+      @trace_response_header_enabled = to_boolean(trace_response_header_enabled)
+
       set_default_propagators
       set_access_token_header
       set_default_exporter
@@ -151,6 +158,20 @@ module Splunk
       end
     end
 
+    def to_boolean(val)
+      # val could already be a boolean so just return the value if it is already
+      # true or false
+      case val
+      when true then true
+      when false then false
+      else
+        !%w[false
+            no
+            f
+            0].include?(val.strip.downcase)
+      end
+    end
+
     def service_name_warning
       <<~WARNING
         service.name attribute is not set, your service is unnamed and will be difficult to identify.
@@ -161,7 +182,8 @@ module Splunk
 
     module_function :configure, :gdi_span_limits, :set_default_propagators, :set_default_exporter,
                     :verify_service_name, :service_name_warning, :default_env_vars,
-                    :set_default_span_limits, :set_access_token_header, :set_endpoint
+                    :set_default_span_limits, :set_access_token_header, :set_endpoint,
+                    :to_boolean, :trace_response_header_enabled
   end
 end
 

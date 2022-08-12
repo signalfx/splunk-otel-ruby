@@ -187,6 +187,27 @@ Splunk::Otel.configure do |c|
 end
 ```
 
+### Real User Monitoring
+
+``` ruby
+Splunk::Otel.configure do |c|
+    c.use "OpenTelemetry::Instrumentation::Rack"
+end
+
+Rack::Builder.app do
+    use OpenTelemetry::Instrumentation::Rack::Middlewares::TracerMiddleware
+    use Splunk::Otel::Rack::RumMiddleware
+    run ->(_env) { [200, { "content-type" => "text/plain" }, ["OK"]] }
+end
+```
+
+``` ruby
+Splunk::Otel.configure do |c|
+    c.use "OpenTelemetry::Instrumentation::ActionPack"
+    c.use "Splunk::Otel::Instrumentation::ActionPack"
+end
+```
+
 ## Troubleshooting
 
 For troubleshooting information, see the [Troubleshooting](docs/troubleshooting.md) documentation.
