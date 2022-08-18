@@ -187,6 +187,46 @@ Splunk::Otel.configure do |c|
 end
 ```
 
+### Real User Monitoring
+
+For [Real User Monitoring
+(RUM)](https://www.splunk.com/en_us/products/real-user-monitoring.html) a
+[Rack](https://github.com/rack/rack) middleware is provided which will add trace
+context to the `Server-Timing` header in the response if there is an active
+Span. To use the middleware configure `Splunk::Otel` to use the `Rack`
+instrumentation:
+
+``` ruby
+Splunk::Otel.configure do |c|
+    c.use "OpenTelemetry::Instrumentation::Rack"
+end
+```
+
+And add the middleware in `Rack::Builder`:
+ 
+``` ruby
+Rack::Builder.app do
+    use OpenTelemetry::Instrumentation::Rack::Middlewares::TracerMiddleware
+    use Splunk::Otel::Rack::RumMiddleware
+    run ->(_env) { [200, { "content-type" => "text/plain" }, ["OK"]] }
+end
+```
+
+When using [ActionPack](https://rubygems.org/gems/actionpack/), which Rails
+does, the middleware will be added automatically if the Instrumentation Library
+for ActionPack, "Splunk::Otel::Instrumentation::ActionPack", is used:
+
+``` ruby
+Splunk::Otel.configure do |c|
+    c.use "OpenTelemetry::Instrumentation::ActionPack"
+    c.use "Splunk::Otel::Instrumentation::ActionPack"
+end
+```
+
+To disable the response headers being added the environment variable
+`SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` can be set to `false`, or pass
+`trace_response_header_enabled: false` to `Splunk::Otel.configure`.
+
 ## Troubleshooting
 
 For troubleshooting information, see the [Troubleshooting](docs/troubleshooting.md) documentation.

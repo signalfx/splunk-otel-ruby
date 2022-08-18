@@ -15,7 +15,11 @@ module Splunk
         def call(env)
           status, headers, body = @app.call(env)
 
-          headers = Splunk::Otel::Common.rum_headers(headers)
+          headers = if Splunk::Otel.trace_response_header_enabled
+                      Splunk::Otel::Common.rum_headers(headers)
+                    else
+                      headers
+                    end
 
           [status, headers, body]
         end
