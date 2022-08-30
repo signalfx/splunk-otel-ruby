@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "otel/version"
 require "opentelemetry/sdk"
-
-# FIXME: without this, otlp doesn't work out-of-the-box
 require "opentelemetry-exporter-otlp"
+
+require_relative "otel/version"
+require_relative "otel/proprietary_exporters"
 
 module Splunk
   # main module for application startup configuration
-  module Otel
+  module Otel # rubocop:disable Metrics/ModuleLength
     # custom exception types in this gem must inherit from Splunk::Otel::Error
     # this allows the user to rescue a generic exception type to catch all exceptions
     class Error < StandardError; end
@@ -57,26 +57,34 @@ module Splunk
                   trace_response_header_enabled: ENV.fetch("SPLUNK_TRACE_RESPONSE_HEADER_ENABLED", "true"))
       @trace_response_header_enabled = to_boolean(trace_response_header_enabled)
 
-      set_default_propagators
-      set_access_token_header
-      set_default_exporter
-      set_default_span_limits
+      set_defaults
 
       # run SDK's setup function
-      OpenTelemetry::SDK.configure do |c|
-        c.service_name = service_name
-        c.resource = OpenTelemetry::SDK::Resources::Resource.create(
+      OpenTelemetry::SDK.configure do |configurator|
+        class << configurator
+          include Splunk::Otel::ExporterExtensions
+        end
+
+        configurator.service_name = service_name
+        configurator.resource = OpenTelemetry::SDK::Resources::Resource.create(
           "splunk.distro.version" => Splunk::Otel::VERSION
         )
 
-        c.use_all if auto_instrument
-        yield c if block_given?
+        configurator.use_all if auto_instrument
+        yield configurator if block_given?
       end
 
       # set span limits to GDI defaults if not set by the user
       OpenTelemetry.tracer_provider.span_limits = gdi_span_limits
 
       verify_service_name
+    end
+
+    def set_defaults
+      set_default_propagators
+      set_access_token_header
+      set_default_exporter
+      set_default_span_limits
     end
 
     # verify `service.name` is set and print a warning if it is still the default
@@ -183,7 +191,7 @@ module Splunk
     module_function :configure, :gdi_span_limits, :set_default_propagators, :set_default_exporter,
                     :verify_service_name, :service_name_warning, :default_env_vars,
                     :set_default_span_limits, :set_access_token_header, :set_endpoint,
-                    :to_boolean, :trace_response_header_enabled
+                    :to_boolean, :trace_response_header_enabled, :set_defaults
   end
 end
 

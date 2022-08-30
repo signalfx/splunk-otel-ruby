@@ -203,7 +203,7 @@ end
 ```
 
 And add the middleware in `Rack::Builder`:
- 
+
 ``` ruby
 Rack::Builder.app do
     use OpenTelemetry::Instrumentation::Rack::Middlewares::TracerMiddleware
@@ -226,6 +226,14 @@ end
 To disable the response headers being added the environment variable
 `SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` can be set to `false`, or pass
 `trace_response_header_enabled: false` to `Splunk::Otel.configure`.
+
+## Configure for use with Smart Agent
+
+This distribution includes the `jaeger-thrift-splunk` exporter, which is preconfigured to send data to local instance of the [SignalFx Smart Agent](https://github.com/signalfx/signalfx-agent).
+
+To use the `jaeger-thrift-splunk` exporter, set the`OTEL_TRACES_EXPORTER` environment variable to `jaeger-thrift-splunk`, or append the exporter to the existing values. For example,  `OTEL_TRACES_EXPORTER=otlp,jaeger-thrift-splunk`.
+
+If the `SPLUNK_REALM` or the `OTEL_EXPORTER_JAEGER_ENDPOINT` environmental variables are set, the default endpoint is overwritten.
 
 ## Troubleshooting
 

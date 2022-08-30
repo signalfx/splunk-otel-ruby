@@ -1,0 +1,5 @@
+signalFxAccessToken: ""
+ingestUrl: "https://ingest.lab0.signalfx.com"
+signalFxRealm: "lab0"
+monitors:
+  - type: trace-forwarder

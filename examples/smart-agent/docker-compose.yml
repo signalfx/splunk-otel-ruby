@@ -1,0 +1,8 @@
+version: "3"
+services:
+  otel:
+    image: quay.io/signalfx/signalfx-agent:5
+    ports:
+      - 9080:9080
+    volumes:
+      - ./smart-agent-config.yaml:/etc/signalfx/agent.yaml
