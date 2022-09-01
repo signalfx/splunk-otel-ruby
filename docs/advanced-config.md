@@ -30,7 +30,7 @@ set the `SPLUNK_ACCESS_TOKEN` and `SPLUNK_REALM` environment variables.
 | -------------------------------------- | ------------ | ------------  | ----------- | ---                                                                                                                                                  |
 | `SPLUNK_ACCESS_TOKEN`                  | | unset         | Stable      | Splunk authentication token that lets exporters send data directly to Splunk Observability Cloud. Unset by default. Not required unless you need to send data to the Observability Cloud ingest endpoint. See [Create and manage authentication tokens using Splunk Observability Cloud](https://docs.splunk.com/Observability/admin/authentication-tokens/tokens.html#admin-tokens).                               |
 | `SPLUNK_REALM`                         | | unset           | Stable      | The name of your organization’s realm, for example, us0. When you set the realm, traces are sent directly to the ingest endpoint of Splunk Observability Cloud, bypassing the Splunk OpenTelemetry Collector. |
-| `SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` | `trace_response_header_enabled` | `True` | Experimental | Enables adding server trace information to HTTP response headers in Rack middleware. |
+| `SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` | `trace_response_header_enabled` | `True` | Stable | Enables adding server trace information to HTTP response headers in Rack middleware. |
 
 ## Propagators configuration
 
