@@ -5,9 +5,13 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 10
-  # Maintain dependencies for GitHub Actions
 - package-ecosystem: "github-actions"
   directory: "/"
+  schedule:
+    interval: "weekly"
+    day: "friday"
+- package-ecosystem: "docker"
+  directory: "/examples/rails-7-barebones/"
   schedule:
     interval: "weekly"
     day: "friday"
