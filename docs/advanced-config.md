@@ -44,6 +44,10 @@ To keep backward compatibility with manual instrumentation for the SignalFx Ruby
 export OTEL_PROPAGATORS=b3multi
 ```
 
+
+Supported values for `OTEL_PROPAGATORS` are `tracecontext`, `baggage`, `b3`,
+`b3multi`, `jaeger`, `xray`, `ottrace` and `none`.
+
 ## Trace configuration
 
 | Environment variable      | Config Option         | Default value             | Notes                                                                                                                                                                                                         |
