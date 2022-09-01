@@ -2,10 +2,10 @@
 
 ## Trace exporters
 
-| Environment variable              | Default value                    | Support     | Description                                                                                                                              |
-| --------------------------------- | -------                          | ----------- | ---                                                                                                                                      |
-| `OTEL_TRACES_EXPORTER`            | `otlp`                           | Stable      | Select the traces exporter to use. We recommend using the OTLP exporter (`otlp`).
-| `OTEL_EXPORTER_OTLP_ENDPOINT`     | `http://localhost:4318`          | Stable      | The OTLP endpoint to connect to.
+| Environment variable          | Default value           | Support | Description                                                                       |
+|-------------------------------|-------------------------|---------|-----------------------------------------------------------------------------------|
+| `OTEL_TRACES_EXPORTER`        | `otlp`                  | Stable  | Select the traces exporter to use. We recommend using the OTLP exporter (`otlp`). |
+| `OTEL_EXPORTER_OTLP_ENDPOINT` | `http://localhost:4318` | Stable  | The OTLP endpoint to connect to.                                                  |
 
 The Splunk Distribution of OpenTelemetry Ruby uses the HTTP OTLP traces exporter as
 the default setting. For debugging purposes, use the `console` exporter, which writes
@@ -26,11 +26,20 @@ OpenTelemetry Ruby.
 To export traces directly to Splunk Observability Cloud, bypassing the Collector,
 set the `SPLUNK_ACCESS_TOKEN` and `SPLUNK_REALM` environment variables.
 
-| Environment variable                  | Config Option | Default value | Support     | Description                                                                                                                                          |
-| -------------------------------------- | ------------ | ------------  | ----------- | ---                                                                                                                                                  |
-| `SPLUNK_ACCESS_TOKEN`                  | | unset         | Stable      | Splunk authentication token that lets exporters send data directly to Splunk Observability Cloud. Unset by default. Not required unless you need to send data to the Observability Cloud ingest endpoint. See [Create and manage authentication tokens using Splunk Observability Cloud](https://docs.splunk.com/Observability/admin/authentication-tokens/tokens.html#admin-tokens).                               |
-| `SPLUNK_REALM`                         | | unset           | Stable      | The name of your organization’s realm, for example, us0. When you set the realm, traces are sent directly to the ingest endpoint of Splunk Observability Cloud, bypassing the Splunk OpenTelemetry Collector. |
-| `SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` | `trace_response_header_enabled` | `True` | Stable | Enables adding server trace information to HTTP response headers in Rack middleware. |
+| Environment variable                   | Config Option                   | Default value | Support | Description                                                                                                                                                                                                                                                                                                                                                                           |
+|----------------------------------------|---------------------------------|---------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `SPLUNK_ACCESS_TOKEN`                  |                                 | unset         | Stable  | Splunk authentication token that lets exporters send data directly to Splunk Observability Cloud. Unset by default. Not required unless you need to send data to the Observability Cloud ingest endpoint. See [Create and manage authentication tokens using Splunk Observability Cloud](https://docs.splunk.com/Observability/admin/authentication-tokens/tokens.html#admin-tokens). |
+| `SPLUNK_REALM`                         |                                 | unset         | Stable  | The name of your organization’s realm, for example, us0. When you set the realm, traces are sent directly to the ingest endpoint of Splunk Observability Cloud, bypassing the Splunk OpenTelemetry Collector.                                                                                                                                                                         |
+| `SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` | `trace_response_header_enabled` | `True`        | Stable  | Enables adding server trace information to HTTP response headers in Rack middleware.                                                                                                                                                                                                                                                                                                  |
+
+## Exporting to the Smart Agent
+
+This distribution includes the `jaeger-thrift-splunk` exporter, which is preconfigured to send data to local instance of the [SignalFx Smart Agent](https://github.com/signalfx/signalfx-agent).
+
+| Environment variable            | Config Option | Default value | Support | Description                                                                                                                                                    |
+|---------------------------------|---------------|---------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `OTEL_EXPORTER_JAEGER_ENDPOINT` |               | unset         | Stable  | The endpoint to export traces using the `jaeger-thrift-splunk` exporter. If set this overrides the default jaeger endpint of `http://127.0.0.1:9080/v1/trace`. |
+
 
 ## Propagators configuration
 
