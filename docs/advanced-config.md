@@ -7,7 +7,7 @@
 | `OTEL_TRACES_EXPORTER`            | `otlp`                           | Stable      | Select the traces exporter to use. We recommend using the OTLP exporter (`otlp`).
 | `OTEL_EXPORTER_OTLP_ENDPOINT`     | `http://localhost:4318`          | Stable      | The OTLP endpoint to connect to.
 
-The Splunk Distribution of OpenTelemetry Ruby uses the OTLP traces exporter as
+The Splunk Distribution of OpenTelemetry Ruby uses the HTTP OTLP traces exporter as
 the default setting. For debugging purposes, use the `console` exporter, which writes
 spans directly to the console.
 
@@ -16,6 +16,10 @@ An example of setting an alternate trace exporter:
 ```
 export OTEL_TRACES_EXPORTER=console
 ```
+
+Supported values for `OTEL_TRACES_EXPORTER` are `otlp` and
+`jaeger-thrift-splunk`. Only the HTTP version of `otlp` is supported by the
+OpenTelemetry Ruby.
 
 ## Exporting directly to Splunk Observability Cloud
 
