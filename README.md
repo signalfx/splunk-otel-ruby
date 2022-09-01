@@ -159,9 +159,14 @@ OpenTelemetry::SDK.configure do |c|
 end
 ```
 
-To enable instrumentation libraries manually, see [Manual instrumentation](#manually-instrument-code).
+To enable instrumentation libraries manually, see [Manual library instrumentation](#manual-library-instrumentation).
 
 ### Manual instrumentation
+
+Documentation on how to manually instrument a Ruby application is available in the 
+[OpenTelemetry official documentation](https://opentelemetry.io/docs/instrumentation/ruby/manual/).
+
+### Manual library instrumentation
 
 Instrumentation gems can also be installed and enabled individually. This may be
 preferred in order to control exactly which gems are fetched when building your project.
