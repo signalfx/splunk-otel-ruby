@@ -9,6 +9,7 @@ and this repository adheres to [Semantic Versioning](https://semver.org/spec/v2.
 
 ### Added
 
+- OpenTelemetry Ruby SDK and API are updated to 1.0
 - [pre-configured support for Smart
   Agent](https://github.com/signalfx/splunk-otel-ruby/pull/8)
 - [support for SPLUNK_TRACE_RESPONSE_HEADER_ENABLED environment
