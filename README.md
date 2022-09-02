@@ -169,9 +169,10 @@ Documentation on how to manually instrument a Ruby application is available in t
 To extend the instrumentation with the OpenTelemetry Instrumentation for Ruby,
 you have to use a compatible API version.
 
-The Splunk Distribution of OpenTelemetry Ruby version 0.1.0 is compatible with:
+The Splunk Distribution of OpenTelemetry Ruby is compatible with:
 
 - OpenTelemetry API version 1.0.0
+- OpenTelemetry SDK version 1.0.0
 
 ### Manual library instrumentation
 
