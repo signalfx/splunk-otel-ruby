@@ -7,6 +7,8 @@ and this repository adheres to [Semantic Versioning](https://semver.org/spec/v2.
 
 ## Unreleased
 
+## v0.2.0 - 2022-09-06
+
 ### Added
 
 - OpenTelemetry Ruby SDK and API are updated to 1.0
