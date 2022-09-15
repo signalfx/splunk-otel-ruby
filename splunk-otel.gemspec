@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "opentelemetry-api", "~> 1.0"
-  spec.add_dependency "opentelemetry-exporter-jaeger", "~> 0.20.1"
+  spec.add_dependency "opentelemetry-exporter-jaeger", ">= 0.20.1", "< 0.23.0"
   spec.add_dependency "opentelemetry-exporter-otlp", "~> 0.21.0"
   spec.add_dependency "opentelemetry-instrumentation-base", "~> 0.21.0"
   spec.add_dependency "opentelemetry-propagator-b3", "~> 0.19.2"
