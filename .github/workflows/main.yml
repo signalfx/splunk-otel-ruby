@@ -8,33 +8,40 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     strategy:
       matrix:
-        ruby-version: [3.1, 3.0, 2.7, 2.6]
+        rubygems: [
+          { ruby: "3.1", appraisal: "rails-7.0" },
+          { ruby: "3.0", appraisal: "rails-7.0" },
+          { ruby: "2.7", appraisal: "rails-7.0" },
+          { ruby: "2.7", appraisal: "rails-6.1" },
+          { ruby: "2.6", appraisal: "rails-6.1" }
+        ]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
 
       - name: Run Collector
         run: docker-compose up -d
 
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
+      - name: Set up Ruby ${{ matrix.rubygems.ruby }}
+        uses: ruby/setup-ruby@v1.117.0
         with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
+          ruby-version: ${{ matrix.rubygems.ruby }}
       - name: Apply RubyGems fixes
         run: gem update --system
       - name: Install dependencies
         run: bundle install
+      - name: Install appraisal dependencies
+        run: bundle exec appraisal install
       - name: Rubocop
         run: bundle exec rubocop
       - name: Run tests
-        run: bundle exec rake test
+        run: bundle exec appraisal ${{ matrix.rubygems.appraisal }} rake test
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v3.1.1
       - name: Run basic example e2e test
         run: ruby console.rb
         working-directory: ./examples/basic/
@@ -42,18 +49,18 @@ jobs:
           TEST: true
 
   test-e2e-rails-7-barebones:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
       - name: Run e2e tests via Docker
         working-directory: ./examples/rails-7-barebones
         run: docker-compose up --build --exit-code-from tester
 
   linkChecker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.5.0
+        uses: lycheeverse/lychee-action@v1.5.1
         with:
           fail: true

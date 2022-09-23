@@ -1,7 +1,7 @@
 version: "3"
 services:
   otel:
-    image: quay.io/signalfx/splunk-otel-collector:latest
+    image: quay.io/signalfx/splunk-otel-collector:0.59.1
     command: ["--config=/conf/otel-collector-config.yaml"]
     privileged: true
     ports:
