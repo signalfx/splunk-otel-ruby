@@ -1,5 +1,8 @@
-FROM ruby:3-buster
-RUN apt-get update -qq && apt-get install -y nodejs netcat
+FROM ruby:3.1.2-buster
+RUN apt-get update -qq
+RUN apt-get install -y \
+    nodejs="10.24.0~dfsg-1~deb10u1" \
+    netcat=1.10-41.1
 
 # ruby comes with older versions of bundler sometimes
 RUN gem install bundler -v "2.3.14"

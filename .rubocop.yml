@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - 'bin/*'
     - 'examples/rails-7-barebones/bin/*'
+    - 'gemfiles/*'
 
     # github actions' weirdness
     # https://github.com/rubocop/rubocop/issues/9832#issuecomment-882111229

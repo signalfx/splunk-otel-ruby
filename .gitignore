@@ -11,3 +11,6 @@ Gemfile.lock
 
 # allow private binstubs
 bin/
+
+# appraisals
+/gemfiles/

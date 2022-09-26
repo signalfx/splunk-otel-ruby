@@ -32,19 +32,21 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-propagator-b3", "~> 0.19.2"
   spec.add_dependency "opentelemetry-sdk", "~> 1.0"
 
-  # development dependencies
-  spec.add_development_dependency "rails"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rubocop", "~> 1.25"
-  spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
-  spec.add_development_dependency "simplecov", "~> 0.21.2"
-  spec.add_development_dependency "test-unit", "~> 3.0"
+  # development tooling
+  spec.add_development_dependency "appraisal", "2.4.1"
+  spec.add_development_dependency "rake", "13.0.6"
+  spec.add_development_dependency "rubocop", "1.25.1"
+  spec.add_development_dependency "rubocop-rake", "0.6.0"
+  spec.add_development_dependency "simplecov", "0.21.2"
+  spec.add_development_dependency "simplecov-cobertura", "2.1.0"
+  spec.add_development_dependency "test-unit", "3.5.3"
 
+  # development dependencies for integration testing
   spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.2.0"
-  spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.21"
+  spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.21.0"
   spec.add_development_dependency "rack", "~> 2.2"
   spec.add_development_dependency "rack-test", "~> 2.0"
-  spec.add_development_dependency "simplecov-cobertura", "~> 2.1.0"
+  spec.add_development_dependency "rails"
 
   spec.metadata = {
     "rubygems_mfa_required" => "true"

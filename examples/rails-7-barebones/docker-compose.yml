@@ -1,6 +1,6 @@
 services:
   collector:
-    image: quay.io/signalfx/splunk-otel-collector:latest
+    image: quay.io/signalfx/splunk-otel-collector:0.59.1
     command: ["--config=/conf/otel-collector-config.yaml"]
     ports:
       - 4318:4318
