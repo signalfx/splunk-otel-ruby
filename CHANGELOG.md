@@ -7,6 +7,17 @@ and this repository adheres to [Semantic Versioning](https://semver.org/spec/v2.
 
 ## Unreleased
 
+## v0.3.0 - 2022-09-28
+
+### Changed
+
+- [Update opentelemetry-exporter-otlp requirement from ~> 0.21.0 to >= 0.21, <
+  0.25](https://github.com/signalfx/splunk-otel-ruby/pull/60)
+- [Update opentelemetry-propagator-b3 requirement from ~> 0.19.2 to >= 0.19.2, <
+0.21.0](https://github.com/signalfx/splunk-otel-ruby/pull/35)
+- [Update opentelemetry-exporter-jaeger requirement from ~> 0.20.1 to >= 0.20.1,
+< 0 .23.0](https://github.com/signalfx/splunk-otel-ruby/pull/61)
+
 ## v0.2.0 - 2022-09-06
 
 ### Added
