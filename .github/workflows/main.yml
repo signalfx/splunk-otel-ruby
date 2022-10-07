@@ -21,7 +21,7 @@ jobs:
         ]
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.1.0
 
       - name: Run Collector
         run: docker-compose up -d
@@ -51,7 +51,7 @@ jobs:
   test-e2e-rails-7-barebones:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.1.0
       - name: Run e2e tests via Docker
         working-directory: ./examples/rails-7-barebones
         run: docker-compose up --build --exit-code-from tester
@@ -59,7 +59,7 @@ jobs:
   linkChecker:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.1.0
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.5.1
         with:
