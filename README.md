@@ -254,7 +254,7 @@ For troubleshooting information, see the [Troubleshooting](docs/troubleshooting.
 
 # License
 
-The Splunk OpenTelemetry Ruby distribution is released under the terms of the
+The Splunk OpenTelemetry Ruby distribution is licensed under the terms of the
 Apache Software License version 2.0. For more details, see [the license
 file](./LICENSE).
 
