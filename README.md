@@ -43,13 +43,13 @@ This Splunk distribution comes with the following defaults:
 Install the gem by adding it to your project's `Gemfile`:
 
 ``` ruby
-gem "splunk-otel", "~> 0.1"
+gem "splunk-otel", "~> 1.0"
 ```
 
 or
 
 ```shell
-bundle add splunk-otel --version "~> 0.1"
+bundle add splunk-otel --version "~> 1.0"
 ```
 
 Configure OpenTelemetry using the `Splunk::Otel` module from `splunk/otel`:
@@ -119,7 +119,7 @@ the
 gem in your Gemfile:
 
 ``` ruby
-gem "opentelemetry-instrumentation-all", "~> 0.23"
+gem "opentelemetry-instrumentation-all", "~> 0.27"
 ```
 
 Enable the instrumentations from the gem by passing `auto_instrument:true` to
@@ -185,7 +185,7 @@ the project's `Gemfile`. For example, to install the
 instrumentation:
 
 ```
-gem "opentelemetry-instrumentation-sinatra", "~> 0.19"
+gem "opentelemetry-instrumentation-sinatra", "~> 0.21"
 ```
 
 In a block passed to `Splunk::Otel.configure` configure the SDK to use
