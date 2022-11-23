@@ -1,9 +1,18 @@
 # Basic Splunk Otel Distro example
 
+
+## Pre-Requisite for Ruby versions < 3.0
+There was a change to the C++ version used to build the Thrift Ruby extension, a transitive dependency of the `opentelemetry-exporter-jaeger` gem, from building properly.  Running `./console.rb` will spit out a lengthy error message that includes:
+```bash
+binary_protocol_accelerated.c:404:68: error: '(' and '{' tokens introducing statement expression appear in different macro expansion contexts
+```
+
+In order to remediate, you must manually install this gem into your Ruby `gems` path by executing `gem install thrift -- --with-cppflags="-Wno-compound-token-split-by-macro"`.  
+
 The `console.rb` script will use the `splunk-otel` gem from the root of this repo
 as the dependency.
 
-Run the script and the function `BasicExample.some_spans` to create a couple spans and logs.
+Run the script and the function `BasicExample.some_spans` to create a couple spans and logs.  The default instrumentation configuration will be looking for a local instance of an OpenTelemetry Collector. Unless you have specified the [Export To Console](#Export To Console) option, or run a [local instance of a Collector](#Export to Collector)  
 
 ``` shell
 $ ./console.rb
