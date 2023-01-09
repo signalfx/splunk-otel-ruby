@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
 
   # development tooling
   spec.add_development_dependency "appraisal", "2.4.1"
+  spec.add_development_dependency "bundler", "2.3.26"
   spec.add_development_dependency "rake", "13.0.6"
   spec.add_development_dependency "rubocop", "1.36.0"
   spec.add_development_dependency "rubocop-rake", "0.6.0"

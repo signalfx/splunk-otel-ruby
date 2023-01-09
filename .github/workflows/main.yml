@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         rubygems: [
+          { ruby: "3.2", appraisal: "rails-7.0" },
           { ruby: "3.1", appraisal: "rails-7.0" },
           { ruby: "3.0", appraisal: "rails-7.0" },
           { ruby: "2.7", appraisal: "rails-7.0" },
@@ -32,8 +33,10 @@ jobs:
           ruby-version: ${{ matrix.rubygems.ruby }}
       - name: Apply RubyGems fixes
         run: gem update --system
+      - name: Ensure we have modern bundler
+        run: gem install bundler -v '~> 2.3.26'
       - name: Install dependencies
-        run: bundle install
+        run: bundle _2.3.26_
       - name: Install appraisal dependencies
         run: bundle exec appraisal install
       - name: Rubocop
