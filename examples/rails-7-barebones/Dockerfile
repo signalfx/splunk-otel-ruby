@@ -1,4 +1,4 @@
-FROM ruby:3.1.2-buster
+FROM ruby:3.2.0-buster
 RUN apt-get update -qq
 RUN apt-get install -y \
     nodejs="10.24.0~dfsg-1~deb10u2" \
