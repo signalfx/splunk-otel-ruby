@@ -32,7 +32,7 @@ Splunk::Otel.configure do |c|
 end
 ```
 
-To enable only Rails an indiviual `c.use` can be used:
+To enable only Rails, you can use an individual `c.use`:
 
 ```ruby
 Splunk::Otel.configure do |c|
