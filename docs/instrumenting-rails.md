@@ -13,9 +13,10 @@ bundle add opentelemetry-instrumentation-rails --version "~> 0.24"
 ```
 
 Configure OpenTelemetry to use all available instrumentation libraries by adding the
-`Splunk::Otel` module from `splunk/otel` and `use_all()` method:
+`Splunk::Otel` module from `splunk/otel` and `use_all()` method to a Rails initializer:
 
 ``` ruby
+# config/initializers/opentelemetry.rb
 require "splunk/otel"
 ...
 Splunk::Otel.configure do |c|
