@@ -12,7 +12,7 @@ or install the gem using `bundle`:
 bundle add opentelemetry-instrumentation-rails --version "~> 0.24"
 ```
 
-Configure OpenTelemetry to use all available instrumentation libraries using the
+Configure OpenTelemetry to use all available instrumentation libraries by adding the
 `Splunk::Otel` module from `splunk/otel` and `use_all()` method:
 
 ``` ruby
