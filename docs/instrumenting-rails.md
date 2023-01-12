@@ -6,7 +6,7 @@ Install the instrumentation library by adding it to your project's `Gemfile`:
 gem "opentelemetry-instrumentation-rails", "~> 0.24"
 ```
 
-or
+or install the gem using `bundle`:
 
 ```shell
 bundle add opentelemetry-instrumentation-rails --version "~> 0.24"
