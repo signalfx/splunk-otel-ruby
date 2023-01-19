@@ -1,6 +1,45 @@
 # Instrumenting Rails
 
-TODO
+Install the instrumentation library by adding it to your project's `Gemfile`:
+
+``` ruby
+gem "opentelemetry-instrumentation-rails", "~> 0.24"
+```
+
+or install the gem using `bundle`:
+
+```shell
+bundle add opentelemetry-instrumentation-rails --version "~> 0.24"
+```
+
+Configure OpenTelemetry to use all available instrumentation libraries by adding the
+`Splunk::Otel` module from `splunk/otel` and `use_all()` method to a Rails initializer:
+
+``` ruby
+# config/initializers/opentelemetry.rb
+require "splunk/otel"
+...
+Splunk::Otel.configure do |c|
+  c.use_all()
+end
+```
+
+You can disable individual components' instrumentation as options to
+`use_all`. For example to disable Active Record instrumentation:
+
+``` ruby
+Splunk::Otel.configure do |c|
+  c.use_all({ 'OpenTelemetry::Instrumentation::ActiveRecord' => { enabled: false } })
+end
+```
+
+To enable only Rails, you can use an individual `c.use`:
+
+```ruby
+Splunk::Otel.configure do |c|
+  c.use 'OpenTelemetry::Instrumentation::Rails'
+end
+```
 
 ## Example
 
