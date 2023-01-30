@@ -8,8 +8,10 @@ require "opentelemetry/propagator/b3"
 module Splunk
   class OtelOverridesTest < Test::Unit::TestCase
     def setup
+      ENV.clear
       with_env("OTEL_PROPAGATORS" => "b3multi",
                "SPLUNK_REALM" => "eu0",
+               "SPLUNK_ACCESS_TOKEN" => "",
                "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT" => "",
                "OTEL_EXPORTER_OTLP_ENDPOINT" => "",
                "OTEL_RESOURCE_ATTRIBUTES" => "key1=value1,key2=value2") do
@@ -32,6 +34,9 @@ module Splunk
 
       exporter = batch_processor.instance_variable_get(:@exporter)
       assert_equal("https://ingest.eu0.signalfx.com/v2/trace/otlp", exporter.instance_variable_get(:@uri).to_s)
+
+      # tests that setting SPLUNK_ACCESS_TOKEN to empty string does not set x-sf-token header
+      assert_equal({}, exporter.instance_variable_get(:@headers))
     end
   end
 end

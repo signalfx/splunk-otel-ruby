@@ -124,7 +124,7 @@ module Splunk
     # add the access token header if the env variable is set
     def set_access_token_header
       splunk_access_token = ENV.fetch("SPLUNK_ACCESS_TOKEN", nil)
-      return if splunk_access_token.nil?
+      return if splunk_access_token.to_s.empty?
 
       access_header = "x-sf-token=#{splunk_access_token}"
       headers = ENV.fetch("OTEL_EXPORTER_OTLP_HEADERS", nil)
