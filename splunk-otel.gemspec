@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "13.0.6"
   spec.add_development_dependency "rubocop", "1.36.0"
   spec.add_development_dependency "rubocop-rake", "0.6.0"
-  spec.add_development_dependency "simplecov", "0.21.2"
+  spec.add_development_dependency "simplecov", "0.22.0"
   spec.add_development_dependency "simplecov-cobertura", "2.1.0"
   spec.add_development_dependency "test-unit", "3.5.3"
   spec.add_development_dependency "tzinfo-data", "1.2022.7"
