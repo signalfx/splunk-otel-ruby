@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "appraisal", "2.4.1"
   spec.add_development_dependency "bundler", "2.3.26"
   spec.add_development_dependency "rake", "13.0.6"
-  spec.add_development_dependency "rubocop", "1.36.0"
+  spec.add_development_dependency "rubocop", "1.48.0"
   spec.add_development_dependency "rubocop-rake", "0.6.0"
   spec.add_development_dependency "simplecov", "0.21.2"
   spec.add_development_dependency "simplecov-cobertura", "2.1.0"
