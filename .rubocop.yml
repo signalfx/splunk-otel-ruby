@@ -29,3 +29,9 @@ Metrics/MethodLength:
 
 Metrics/ModuleLength:
   Max: 105
+
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
+  Exclude:
+    - 'examples/rails-7-barebones/Gemfile'
+    - 'examples/smart-agent/Gemfile'
