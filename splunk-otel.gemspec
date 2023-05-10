@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov", "0.22.0"
   spec.add_development_dependency "simplecov-cobertura", "2.1.0"
   spec.add_development_dependency "test-unit", "3.5.7"
-  spec.add_development_dependency "tzinfo-data", "1.2022.7"
+  spec.add_development_dependency "tzinfo-data", "1.2023.3"
 
   # development dependencies for integration testing
   spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.5.0"
