@@ -46,7 +46,7 @@ jobs:
       - name: Run tests
         run: bundle exec appraisal ${{ matrix.rubygems.appraisal }} rake test
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3.1.1
+        uses: codecov/codecov-action@v3.1.3
       - name: Run basic example e2e test
         run: ruby console.rb
         working-directory: ./examples/basic/
