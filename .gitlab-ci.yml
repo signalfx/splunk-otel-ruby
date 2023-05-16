@@ -18,7 +18,8 @@ build:
       - Gemfile.lock
   script: |
     gem update --system
-    bundle install
+    gem install bundler:2.3.26
+    bundle _2.3.26_ install
     bundle exec rubocop
     bundle exec rake test
 
