@@ -1,3 +1,1 @@
-The official documentation for this distribution can be found here:
-
-https://docs.splunk.com/Observability/gdi/get-data-in/application/ruby/get-started.html
+The documentation for this distribution can be found in the [Splunk Observability Cloud official documentation](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.application).
