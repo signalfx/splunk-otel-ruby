@@ -1,3 +1,7 @@
+> The official Splunk documentation for this page is [Configure the Splunk Distribution of OTel Ruby](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.configuration). 
+> 
+> For instructions on how to contribute to the docs, see [CONTRIBUTING.md](../CONTRIBUTING.md#documentation).
+
 # Advanced configuration
 
 ## Trace exporters
