@@ -43,8 +43,7 @@ See [Configure the Ruby agent for Splunk Observability Cloud](https://quickdraw.
 You can add trace metadata to logs using the OpenTelemetry trace API. Trace
 metadata lets you explore logs in Splunk Observability Cloud.
 
-See [Connect Ruby trace data with logs for Splunk Observability Cloud
-]([docs/correlating-traces-and-logs.md](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.trace.logs) in the official documentation.
+See [Connect Ruby trace data with logs for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.trace.logs) in the official documentation.
 
 ## Library instrumentation
 
