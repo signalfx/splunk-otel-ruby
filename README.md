@@ -11,8 +11,8 @@
 
 The Splunk Distribution of [OpenTelemetry Instrumentation for
 Ruby](https://github.com/open-telemetry/opentelemetry-ruby) provides a gem for
-setup of OpenTelemetry SDK for reporting distributed traces to [Splunk
-APM](https://docs.splunk.com/Observability/apm/intro-to-apm.html).
+setup of OpenTelemetry SDK for reporting distributed traces to Splunk
+APM.
 
 This distribution comes with the following defaults:
 
@@ -24,221 +24,40 @@ This distribution comes with the following defaults:
 - Unlimited default limits for [configuration options](#trace-configuration) to
   support full-fidelity traces.
 
+If you're using the SignalFx Tracing Library for Ruby and want to migrate to the Splunk Distribution of OpenTelemetry Ruby, see [Migrate from the SignalFx Tracing Library for Ruby](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.migrate) in the official documentation.
+
 ## Requirements
 
-- Ruby 2.6+
+This distribution requires Ruby version 2.6 or higher.
 
 ## Get started
 
-This Splunk distribution comes with the following defaults:
-
-- [W3C tracecontext](https://www.w3.org/TR/trace-context/) and [W3C
-  baggage](https://www.w3.org/TR/baggage/) context propagation.
-- OTLP over HTTP exporter configured to send spans to a locally running [Splunk
-  OpenTelemetry Connector](https://github.com/signalfx/splunk-otel-collector)
-  at http://localhost:4318.
-- Unlimited default limits for configuration options to support full-fidelity
-  traces.
-
-Install the gem by adding it to your project's `Gemfile`:
-
-``` ruby
-gem "splunk-otel", "~> 1.0"
-```
-
-or
-
-```shell
-bundle add splunk-otel --version "~> 1.0"
-```
-
-Configure OpenTelemetry using the `Splunk::Otel` module from `splunk/otel`:
-
-``` ruby
-require "splunk/otel"
-...
-Splunk::Otel.configure
-```
-
-## Basic configuration
-
-The `service.name` resource attribute is the only configuration option that
-needs to be specified, using either the environment variable `OTEL_SERVICE_NAME`
-or passing as an argument to `configure`:
-
-``` ruby
-Splunk::Otel.configure(service_name: "my-service")
-```
-
-Other resource attributes are not strictly required, but
-`deployment.environment` and `service.version` are recommended to be set if they
-are available. These can be set through the environment variable
-`OTEL_RESOURCE_ATTRIBUTES`:
-
-```
-OTEL_RESOURCE_ATTRIBUTES="service.version=1.2.3,deployment.environment=production"
-```
-
-alternatively, if needed, more attributes can be added in code using:
-
-```ruby
-Splunk::Otel.configure(service_name: "my-service") do |c|
-  c.resource = OpenTelemetry::SDK::Resources::Resource.create(
-    "key" => "value"
-  )
-end
-```
+For complete instructions on how to get started with the Splunk Distribution of OpenTelemetry Ruby, see [Instrument a Ruby application for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.application) in the official documentation.
 
 ## Advanced configuration
 
-See [advanced-config.md](docs/advanced-config.md) for information on how to
-configure the instrumentation.
+See [Configure the Ruby agent for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.configuration) in the official documentation.
 
 ## Correlate traces and logs
 
 You can add trace metadata to logs using the OpenTelemetry trace API. Trace
 metadata lets you explore logs in Splunk Observability Cloud.
 
-See [Correlating traces and logs](docs/correlating-traces-and-logs.md) for more information.
+See [Connect Ruby trace data with logs for Splunk Observability Cloud
+]([docs/correlating-traces-and-logs.md](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.trace.logs) in the official documentation.
 
 ## Library instrumentation
 
 Supported libraries are listed
 [here](https://github.com/open-telemetry/opentelemetry-ruby-contrib/tree/main/instrumentation).
-The corresponding gems for the instrumentation libraries can be found under the
+You can find the corresponding gems for the instrumentation libraries under the
 [opentelemetry-ruby](https://rubygems.org/profiles/opentelemetry-ruby) profile
 on [rubygems.org](https://rubygems.org).
 
-### Automatic instrumentation
 
-You can enable automatic instrumentation of all libraries used in your project
-that have corresponding [OpenTelemetry Ruby
-gems](https://rubygems.org/profiles/opentelemetry-ruby) libraries by installing
-the
-[opentelemetry-instrumentation-all](https://rubygems.org/gems/opentelemetry-instrumentation-all)
-gem in your Gemfile:
+## Manual instrumentation
 
-``` ruby
-gem "opentelemetry-instrumentation-all", "~> 0.27"
-```
-
-Enable the instrumentations from the gem by passing `auto_instrument:true` to
-the `configure` method of `Splunk::Otel`. For example:
-
-``` ruby
-require "splunk/otel"
-
-Splunk::Otel.configure(auto_instrument: true)
-```
-
-The gem fetches all instrumentation libraries but only enables those that
-instrument a dependency in your project. For example, it will fetch
-`opentelemetry-instrumentation-rack` but only if the `rack` gem is included and
-used in your project will the instrumentation be enabled.
-
-`auto_instrument: true` also works if individual instrumentation libraries are
-installed, like the `opentelemetry-instrumentation-sinatra` gem.
-
-To set configuration of one or more instrumentation libraries a config hash
-can be passed to `use_all`:
-
-``` ruby
-OpenTelemetry::SDK.configure do |c|
-  config = {'OpenTelemetry::Instrumentation::Redis' => { opt: "value" }}
-  c.use_all(config)
-end
-```
-
-The option `enabled` can be used to disable individual instrumentation libraries
-when using `opentelemetry-instrumentation-all`:
-
-``` ruby
-OpenTelemetry::SDK.configure do |c|
-  config = {'OpenTelemetry::Instrumentation::Redis' => { enabled: false }}
-  c.use_all(config)
-end
-```
-
-To enable instrumentation libraries manually, see [Manual library instrumentation](#manual-library-instrumentation).
-
-### Manual instrumentation
-
-Documentation on how to manually instrument a Ruby application is available in the 
-[OpenTelemetry official documentation](https://opentelemetry.io/docs/instrumentation/ruby/manual/).
-
-To extend the instrumentation with the OpenTelemetry Instrumentation for Ruby,
-you have to use a compatible API version.
-
-The Splunk Distribution of OpenTelemetry Ruby is compatible with:
-
-- OpenTelemetry API version 1.0.0
-- OpenTelemetry SDK version 1.0.0
-
-### Manual library instrumentation
-
-Instrumentation gems can also be installed and enabled individually. This may be
-preferred in order to control exactly which gems are fetched when building your project.
-
-Install the instrumentation library by including it in
-the project's `Gemfile`. For example, to install the
-[Sinatra](https://rubygems.org/gems/opentelemetry-instrumentation-sinatra)
-instrumentation:
-
-```
-gem "opentelemetry-instrumentation-sinatra", "~> 0.21"
-```
-
-In a block passed to `Splunk::Otel.configure` configure the SDK to use
-each of the instrumentation libraries. In the case of the Sinatra instrumentation,
-the block would look like the following example:
-
-``` ruby
-require "splunk/otel"
-
-Splunk::Otel.configure do |c|
-  c.use "OpenTelemetry::Instrumentation::Sinatra", { opt: "value" }
-end
-```
-
-### Real User Monitoring
-
-For [Real User Monitoring
-(RUM)](https://www.splunk.com/en_us/products/real-user-monitoring.html) a
-[Rack](https://github.com/rack/rack) middleware is provided which will add trace
-context to the `Server-Timing` header in the response if there is an active
-Span. To use the middleware configure `Splunk::Otel` to use the `Rack`
-instrumentation:
-
-``` ruby
-Splunk::Otel.configure do |c|
-    c.use "OpenTelemetry::Instrumentation::Rack"
-end
-```
-
-And add the middleware in `Rack::Builder`:
-
-``` ruby
-Rack::Builder.app do
-    use OpenTelemetry::Instrumentation::Rack::Middlewares::TracerMiddleware
-    use Splunk::Otel::Rack::RumMiddleware
-    run ->(_env) { [200, { "content-type" => "text/plain" }, ["OK"]] }
-end
-```
-
-When using [ActionPack](https://rubygems.org/gems/actionpack/), which Rails
-does, the middleware will be added automatically if the Instrumentation Library
-for ActionPack, "Splunk::Otel::Instrumentation::ActionPack", is used:
-
-``` ruby
-Splunk::Otel.configure do |c|
-    c.use "OpenTelemetry::Instrumentation::ActionPack"
-    c.use "Splunk::Otel::Instrumentation::ActionPack"
-end
-```
-
-To disable the response headers being added the environment variable
-`SPLUNK_TRACE_RESPONSE_HEADER_ENABLED` can be set to `false`, or pass
-`trace_response_header_enabled: false` to `Splunk::Otel.configure`.
+See [Manually instrument Ruby applications for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.manual.instrumentation) for instructions on how to manually instrument Ruby applications.
 
 ## Configure for use with Smart Agent
 
@@ -250,7 +69,7 @@ If the `SPLUNK_REALM` or the `OTEL_EXPORTER_JAEGER_ENDPOINT` environmental varia
 
 ## Troubleshooting
 
-For troubleshooting information, see the [Troubleshooting](docs/troubleshooting.md) documentation.
+For troubleshooting information, see the [Troubleshoot Ruby instrumentation for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.troubleshooting) in the official documentation.
 
 # License
 
@@ -266,4 +85,3 @@ file](./LICENSE).
 >
 > Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
->ℹ️&nbsp;&nbsp;SignalFx was acquired by Splunk in October 2019. See [Splunk SignalFx](https://www.splunk.com/en_us/investor-relations/acquisitions/signalfx.html) for more information.
