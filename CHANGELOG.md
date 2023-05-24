@@ -7,6 +7,14 @@ and this repository adheres to [Semantic Versioning](https://semver.org/spec/v2.
 
 ## Unreleased
 
+## v1.1.1 - 2023-05-24
+
+- No significant changes.
+
+## v1.1.0 - 2023-01-30
+
+- fix handling of SPLUNK_ACCESS_TOKEN to check for empty string [#114](https://github.com/signalfx/splunk-otel-ruby/pull/114)
+
 ## v1.0.0 - 2022-09-29
 
 ## v0.3.0 - 2022-09-28
