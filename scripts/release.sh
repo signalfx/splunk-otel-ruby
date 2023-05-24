@@ -31,8 +31,10 @@ create_gh_release() {
     --title "Release $release_tag"
 }
 
-create_gh_release
-
+# the gem publish for the tag is the most important so do that first
 bundle install
 bundle exec rake build
 bundle exec gem push pkg/splunk-otel-${release_version}.gem
+
+create_gh_release
+
