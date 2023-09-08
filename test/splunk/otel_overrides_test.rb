@@ -36,7 +36,7 @@ module Splunk
       assert_equal("https://ingest.eu0.signalfx.com/v2/trace/otlp", exporter.instance_variable_get(:@uri).to_s)
 
       # tests that setting SPLUNK_ACCESS_TOKEN to empty string does not set x-sf-token header
-      assert_equal({}, exporter.instance_variable_get(:@headers))
+      assert_false(exporter.instance_variable_get(:@headers).to_s.downcase.include? "x-sf-token")
     end
   end
 end
