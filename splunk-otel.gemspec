@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop-rake", "0.6.0"
   spec.add_development_dependency "simplecov", "0.22.0"
   spec.add_development_dependency "simplecov-cobertura", "2.1.0"
-  spec.add_development_dependency "test-unit", "3.5.8"
+  spec.add_development_dependency "test-unit", "3.6.1"
   spec.add_development_dependency "tzinfo-data", "1.2023.3"
 
   # development dependencies for integration testing
