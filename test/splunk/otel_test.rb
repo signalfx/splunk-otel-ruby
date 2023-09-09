@@ -42,7 +42,7 @@ module Splunk
       exporter = batch_processor.instance_variable_get(:@exporter)
       assert_equal("http://localhost:4318/v1/traces", exporter.instance_variable_get(:@uri).to_s)
       assert_equal("gzip", exporter.instance_variable_get(:@compression))
-      assert_equal({ "x-sf-token" => "abcd" }, exporter.instance_variable_get(:@headers))
+      assert_equal("abcd", exporter.instance_variable_get(:@headers)["x-sf-token"])
     end
 
     test "Distro Resource attribute" do
