@@ -7,12 +7,10 @@ gemfile do
   source "https://rubygems.org"
 
   gem "splunk-otel", path: "../../"
-  gem "opentelemetry-exporter-otlp", "~> 0.21.0"
 end
 
 require "splunk/otel"
 require "splunk/otel/logging"
-require "opentelemetry/exporter/otlp"
 require "net/http"
 require "json"
 
