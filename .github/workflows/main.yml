@@ -34,7 +34,7 @@ jobs:
       - name: Apply RubyGems fixes
         run: gem update --system
       - name: Ensure we have modern bundler
-        run: gem install bundler -v '~> 2.3.26'
+        run: gem install bundler -v '~> 2.3.40'
       - name: Install dependencies
         run: bundle _2.3.26_
       - name: Verify nokogiri
