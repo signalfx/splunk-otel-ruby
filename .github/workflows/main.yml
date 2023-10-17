@@ -36,7 +36,7 @@ jobs:
       - name: Ensure we have modern bundler
         run: gem install bundler -v '~> 2.4.20'
       - name: Install dependencies
-        run: bundle _2.3.26_
+        run: bundle _2.4.20_
       - name: Verify nokogiri
         run: bundle exec nokogiri -v
       - name: Install appraisal dependencies
