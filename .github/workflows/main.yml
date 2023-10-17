@@ -15,10 +15,7 @@ jobs:
         rubygems: [
           { ruby: "3.2", appraisal: "rails-7.0" },
           { ruby: "3.1", appraisal: "rails-7.0" },
-          { ruby: "3.0", appraisal: "rails-7.0" },
-          { ruby: "2.7", appraisal: "rails-7.0" },
-          { ruby: "2.7", appraisal: "rails-6.1" },
-          { ruby: "2.6", appraisal: "rails-6.1" }
+          { ruby: "3.0", appraisal: "rails-7.0" }
         ]
 
     steps:
