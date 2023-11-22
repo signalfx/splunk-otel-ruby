@@ -15,10 +15,7 @@ jobs:
         rubygems: [
           { ruby: "3.2", appraisal: "rails-7.0" },
           { ruby: "3.1", appraisal: "rails-7.0" },
-          { ruby: "3.0", appraisal: "rails-7.0" },
-          { ruby: "2.7", appraisal: "rails-7.0" },
-          { ruby: "2.7", appraisal: "rails-6.1" },
-          { ruby: "2.6", appraisal: "rails-6.1" }
+          { ruby: "3.0", appraisal: "rails-7.0" }
         ]
 
     steps:
@@ -34,9 +31,9 @@ jobs:
       - name: Apply RubyGems fixes
         run: gem update --system
       - name: Ensure we have modern bundler
-        run: gem install bundler -v '~> 2.3.26'
+        run: gem install bundler -v '2.4.21'
       - name: Install dependencies
-        run: bundle _2.3.26_
+        run: bundle _2.4.21_
       - name: Verify nokogiri
         run: bundle exec nokogiri -v
       - name: Install appraisal dependencies

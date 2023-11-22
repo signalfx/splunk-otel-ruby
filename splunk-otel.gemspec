@@ -25,17 +25,17 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "opentelemetry-api", "~> 1.0"
+  spec.add_dependency "opentelemetry-api", "~> 1.2"
 
-  spec.add_dependency "opentelemetry-exporter-jaeger", ">= 0.20.1", "< 0.24.0"
-  spec.add_dependency "opentelemetry-exporter-otlp", ">= 0.21", "< 0.27"
-  spec.add_dependency "opentelemetry-instrumentation-base", "~> 0.21"
-  spec.add_dependency "opentelemetry-propagator-b3", ">= 0.19.2", "< 0.22.0"
-  spec.add_dependency "opentelemetry-sdk", "~> 1.0"
+  spec.add_dependency "opentelemetry-exporter-jaeger", "~> 0.23.0"
+  spec.add_dependency "opentelemetry-exporter-otlp", "~> 0.26.1"
+  spec.add_dependency "opentelemetry-instrumentation-base", "~> 0.22.2"
+  spec.add_dependency "opentelemetry-propagator-b3", "~> 0.21.0"
+  spec.add_dependency "opentelemetry-sdk", "~> 1.3.0"
 
   # development tooling
   spec.add_development_dependency "appraisal", "2.5.0"
-  spec.add_development_dependency "bundler", "2.3.26"
+  spec.add_development_dependency "bundler", "~> 2.4.21"
   spec.add_development_dependency "rake", "13.0.6"
   spec.add_development_dependency "rubocop", "1.50.2"
   spec.add_development_dependency "rubocop-rake", "0.6.0"
@@ -45,8 +45,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "tzinfo-data", "1.2023.3"
 
   # development dependencies for integration testing
-  spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.5.0"
-  spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.22.1"
+  spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.7.0"
+  spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.23.4"
   spec.add_development_dependency "rack", "~> 2.2"
   spec.add_development_dependency "rack-test", "~> 2.0"
   spec.add_development_dependency "rails"
