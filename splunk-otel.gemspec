@@ -45,7 +45,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "tzinfo-data", "1.2023.3"
 
   # development dependencies for integration testing
-  spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.7.0"
+  spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.8.0"
   spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.23.4"
   spec.add_development_dependency "rack", "~> 2.2"
   spec.add_development_dependency "rack-test", "~> 2.0"
