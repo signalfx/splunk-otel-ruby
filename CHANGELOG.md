@@ -7,6 +7,10 @@ and this repository adheres to [Semantic Versioning](https://semver.org/spec/v2.
 
 ## Unreleased
 
+## v1.2.0 - 2023-11-28
+
+- Uprade to OpenTelemetry API 1.2 and SDK 1.3. Drop support for Ruby 2. [#186](https://github.com/signalfx/splunk-otel-ruby/pull/186)
+
 ## v1.1.3 - 2023-05-24
 
 - No changes.
