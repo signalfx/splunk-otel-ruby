@@ -28,7 +28,7 @@ If you're using the SignalFx Tracing Library for Ruby and want to migrate to the
 
 ## Requirements
 
-This distribution requires Ruby version 2.6 or higher.
+This distribution requires Ruby version 3.0 or higher.
 
 ## Get started
 
