@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative "./rack/middleware"
+require_relative "rack/middleware"
