@@ -25,7 +25,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Set up Ruby ${{ matrix.rubygems.ruby }}
-        uses: ruby/setup-ruby@v1.162.0
+        uses: ruby/setup-ruby@v1.167.0
         with:
           ruby-version: ${{ matrix.rubygems.ruby }}
       - name: Apply RubyGems fixes
