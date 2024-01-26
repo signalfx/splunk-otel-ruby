@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-exporter-otlp", "~> 0.26.1"
   spec.add_dependency "opentelemetry-instrumentation-base", "~> 0.22.2"
   spec.add_dependency "opentelemetry-propagator-b3", "~> 0.21.0"
-  spec.add_dependency "opentelemetry-sdk", "~> 1.3.0"
+  spec.add_dependency "opentelemetry-sdk", ">= 1.3", "< 1.5"
 
   # development tooling
   spec.add_development_dependency "appraisal", "2.5.0"
