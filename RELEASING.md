@@ -15,5 +15,5 @@ both create a draft Github Release and push a Gem.
 - Once PR is approved and merged created a tag with the same version as
   `version.rb` prefixed with `v` and push the tag
 - Watch Gitlab CI for the `release` job to complete
-- Update the newly created Github Release notes with the contents of
+- Back on Github create a release from the pushed tag with the contents of
   `CHANGELOG.md`
