@@ -1,4 +1,4 @@
-> The official Splunk documentation for this page is [Configure the Splunk Distribution of OTel Ruby](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.configuration). 
+> The official Splunk documentation for this page is [Configure the Splunk Distribution of OTel Ruby](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/configuration/advanced-ruby-otel-configuration.html). 
 > 
 > For instructions on how to contribute to the docs, see [CONTRIBUTING.md](../CONTRIBUTING.md#documentation).
 

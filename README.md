@@ -1,3 +1,10 @@
+> ⚠️ Deprecation Notice
+
+> The Splunk Distribution of OpenTelemetry Ruby is deprecated as of March 15, 2024 and will reach end of Support on March 15, 2025.
+> Until then, only critical security fixes and bug fixes will be provided. After the date, this repository will be archived and no longer maintained.
+> New customers instrumenting Ruby applications should use the [OpenTelemetry Distribution of Ruby](https://github.com/open-telemetry/opentelemetry-ruby).
+> Existing customers should consider migrating to [OpenTelemetry Distribution of Ruby](https://github.com/open-telemetry/opentelemetry-ruby) which offers similar capabilities. To learn how to instrument Ruby code see the [Splunk documentation](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/get-started-ruby.html).
+
 # Splunk Distribution of OpenTelemetry Ruby
 
 <p align="left">
@@ -24,7 +31,7 @@ This distribution comes with the following defaults:
 - Unlimited default limits for [configuration options](#trace-configuration) to
   support full-fidelity traces.
 
-If you're using the SignalFx Tracing Library for Ruby and want to migrate to the Splunk Distribution of OpenTelemetry Ruby, see [Migrate from the SignalFx Tracing Library for Ruby](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.migrate) in the official documentation.
+If you're using the SignalFx Tracing Library for Ruby and want to migrate to the Splunk Distribution of OpenTelemetry Ruby, see [Migrate from the SignalFx Tracing Library for Ruby](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/troubleshooting/migrate-signalfx-ruby-agent-to-otel.html) in the official documentation.
 
 ## Requirements
 
@@ -32,18 +39,18 @@ This distribution requires Ruby version 3.0 or higher.
 
 ## Get started
 
-For complete instructions on how to get started with the Splunk Distribution of OpenTelemetry Ruby, see [Instrument a Ruby application for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.application) in the official documentation.
+For complete instructions on how to get started with the Splunk Distribution of OpenTelemetry Ruby, see [Instrument a Ruby application for Splunk Observability Cloud](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/instrumentation/instrument-ruby-application.html) in the official documentation.
 
 ## Advanced configuration
 
-See [Configure the Ruby agent for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.configuration) in the official documentation.
+See [Configure the Ruby agent for Splunk Observability Cloud](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/configuration/advanced-ruby-otel-configuration.html) in the official documentation.
 
 ## Correlate traces and logs
 
 You can add trace metadata to logs using the OpenTelemetry trace API. Trace
 metadata lets you explore logs in Splunk Observability Cloud.
 
-See [Connect Ruby trace data with logs for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.trace.logs) in the official documentation.
+See [Connect Ruby trace data with logs for Splunk Observability Cloud](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/instrumentation/connect-traces-logs.html) in the official documentation.
 
 ## Library instrumentation
 
@@ -56,7 +63,7 @@ on [rubygems.org](https://rubygems.org).
 
 ## Manual instrumentation
 
-See [Manually instrument Ruby applications for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.manual.instrumentation) for instructions on how to manually instrument Ruby applications.
+See [Manually instrument Ruby applications for Splunk Observability Cloud](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/instrumentation/ruby-manual-instrumentation.html) for instructions on how to manually instrument Ruby applications.
 
 ## Configure for use with Smart Agent
 
@@ -68,7 +75,7 @@ If the `SPLUNK_REALM` or the `OTEL_EXPORTER_JAEGER_ENDPOINT` environmental varia
 
 ## Troubleshooting
 
-For troubleshooting information, see the [Troubleshoot Ruby instrumentation for Splunk Observability Cloud](https://quickdraw.splunk.com/redirect/?product=Observability&version=current&location=ruby.troubleshooting) in the official documentation.
+For troubleshooting information, see the [Troubleshoot Ruby instrumentation for Splunk Observability Cloud](https://docs.splunk.com/observability/en/gdi/get-data-in/application/ruby/distro/troubleshooting/common-ruby-troubleshooting.html) in the official documentation.
 
 # License
 
