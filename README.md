@@ -1,4 +1,4 @@
-> [!WARNING]
+> ⚠️ Deprecation Notice
 > The Splunk Distribution of OpenTelemetry Ruby is deprecated as of March 15, 2024 and will reach end of Support on March 15, 2025.
 > Until then, only critical security fixes and bug fixes will be provided. After the date, this repository will be archived and no longer maintained.
 > New customers instrumenting Ruby applications should use the [OpenTelemetry Distribution of Ruby](https://github.com/open-telemetry/opentelemetry-ruby).
