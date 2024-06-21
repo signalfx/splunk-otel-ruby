@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "opentelemetry-api", "~> 1.2"
 
   spec.add_dependency "opentelemetry-exporter-jaeger", "~> 0.23.0"
-  spec.add_dependency "opentelemetry-exporter-otlp", "~> 0.26.1"
+  spec.add_dependency "opentelemetry-exporter-otlp", ">= 0.26.1", "< 0.29.0"
   spec.add_dependency "opentelemetry-instrumentation-base", "~> 0.22.2"
   spec.add_dependency "opentelemetry-propagator-b3", "~> 0.21.0"
   spec.add_dependency "opentelemetry-sdk", ">= 1.3", "< 1.5"
