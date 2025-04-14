@@ -47,7 +47,7 @@ Gem::Specification.new do |spec|
   # development dependencies for integration testing
   spec.add_development_dependency "opentelemetry-instrumentation-action_pack", "~> 0.9.0"
   spec.add_development_dependency "opentelemetry-instrumentation-rack", "~> 0.24.0"
-  spec.add_development_dependency "rack", "~> 2.2"
+  spec.add_development_dependency "rack", "~> 3.1"
   spec.add_development_dependency "rack-test", "~> 2.0"
   spec.add_development_dependency "rails"
 
